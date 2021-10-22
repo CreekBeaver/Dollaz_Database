@@ -5,55 +5,73 @@
     <title>Employess</title>
 </head>
 <body>
-    <p>Employees</p>
+    <h1>Welcome to the Update Employee Page</h1>
+    <p>
+        <ol>
+            <li> Select the Radio button associated with the Field you wish to change</li>
+            <li> Enter Into the Text Box the New Desired Value </li>
+            <li> Enter the Employee ID which you would like to change </li>
+            <li> Click "Submit". If Changes are accepted, the Table will be Revised. </li>
+
+        </ol>
+    </p>
 
 
      <table>
     <! -- This is what establishes the Table -->
     <thead>
         <tr>
-        <!-- Iterate through each key in the first entry to get the column name -->
-        {% for key in employees[0].keys() %}
-
-        <!-- Create a <th> tag with the key inside of it, this will be our header row -->
-        <th>{{ key }}</th>
-
-        <!-- End of this for loop -->
-         {% endfor %}
+            <th>Employee ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Employment Start Date</th>
+            <th>Employment End Date</th>
+            <th>Title</th>
+            <th>Salary ($)</th>
         </tr>
-    <tbody>
 
+    <tbody>
     <!-- Now, iterate through every person in bsg_people -->
     {% for person in employees %}
         <tr>
-    <!-- Then iterate through every key in the current person dictionary -->
-    {% for key in person.keys() %}
-
-    <!-- Create a <td> element with the value of that key in it -->
+            <!-- Then iterate through every key in the current person dictionary -->
+            {% for key in person.keys() %}
+            <!-- Create a <td> element with the value of that key in it -->
             <td>{{person[key]}}</td>
-    {% endfor %}
+            {% endfor %}
         </tr>
     {% endfor %}
     </table>
 
     ----------------------------------------
 <br>UPDATE employees SET<br>
-<form action="/update_employees" method="post">
-    <!-- Iterate through each key in the first entry to get the column name -->
-    {% for key in employees[0].keys() %}
-    <input type="radio", name="column1" value="{{ key }}" id="{{ key }}">
-    <label for="{{ key }}">{{ key }}</label>
+<form action="/update_employee" method="post">
+    <input type="radio", name="column1" value="first_name" id="first_name">
+    <label for="first_name">First Name</label>
     <br>
-<!-- End of this for loop -->
-    {% endfor %}
+    <input type="radio", name="column1" value="last_name" id="last_name">
+    <label for="last_name">Last Name</label>
+    <br>
+    <input type="radio", name="column1" value="employee_start_date" id="employee_start_date">
+    <label for="employee_start_date">Employee Start Date (YYYY-MM-DD)</label>
+    <br>
+    <input type="radio", name="column1" value="employee_end_date" id="employee_end_date">
+    <label for="employee_end_date">Employee End Date (YYYY-MM-DD)</label>
+    <br>
+    <input type="radio", name="column1" value="title" id="title">
+    <label for="title">Title</label>
+    <br>
+    <input type="radio", name="column1" value="salary" id="salary">
+    <label for="salary">Salary</label>
+    <br>
 =
 <input type="text" name="value1"><br>
-Where
+WHERE
 <br>
 employee_id
 <br>
 =
-<input type="text" name="value2">
+<input type="number" name="employee_id">
 <button type="submit">Submit Button</button>
 </form>
 

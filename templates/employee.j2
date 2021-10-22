@@ -2,25 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Employess</title>
+    <title>Employee</title>
 </head>
 <body>
-    <p>Employees</p>
+    <h1>Welcome to the Employee Page</h1>
+    <p>
+        View, Insert and Delete Values from The Employee Table Below.<br>
+        Click the "Update" button to Update an existing Row.
+    </p>
 
 
      <table>
     <! -- This is what establishes the Table -->
     <thead>
         <tr>
-        <!-- Iterate through each key in the first entry to get the column name -->
-        {% for key in employees[0].keys() %}
-
-        <!-- Create a <th> tag with the key inside of it, this will be our header row -->
-        <th>{{ key }}</th>
-
-        <!-- End of this for loop -->
-         {% endfor %}
+            <th>Employee ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Employment Start Date</th>
+            <th>Employment End Date</th>
+            <th>Title</th>
+            <th>Salary ($)</th>
         </tr>
+        <form action="/employee" method="post">
+            <tr>
+                {% for key in employees[0].keys() %}
+                <!-- Create a <th> tag with the key inside of it, this will be our header row -->
+                <th><input type="text" name="{{ key }}"></th>
+                <!-- End of this for loop -->
+                {% endfor %}
+                <th><button type="submit" name="add_row" value="execute">Add Row</button></th>
+            </tr>
+        </form>
     <tbody>
 
     <!-- Now, iterate through every person in bsg_people -->
@@ -33,7 +46,7 @@
             <td>{{person[key]}}</td>
     {% endfor %}
             <td>
-                <form action="/employees" method="post">
+                <form action="/employee" method="post">
                 <button type="submit" name="delete", value="{{ person['employee_id'] }}">Delete</button>
                 </form>
             </td>
@@ -41,33 +54,10 @@
     {% endfor %}
     </table>
 
-    -----------------------------------------
-    <br>
-        <form action="/employees" method="post">
-        Insert Into employees (
-            {% for key in employees[0].keys() %}
-            {{ key }},            <!-- End of this for loop -->
-            {% endfor %}
-            )
-
-        <!-- Iterate through each key in the first entry to get the column name -->
-        <br>
-            {% for key in employees[0].keys() %}
-
-        <!-- Create a <th> tag with the key inside of it, this will be our header row -->
-        <input type="text" name="{{ key }}">
-
-        <!-- End of this for loop -->
-         {% endfor %}
-        );
-        <button type="submit" name="add_row" value="execute">Add Row</button>
-    </form>
 
     -----------------------------------------
-    <form action="/update_employees", method="get">
+    <form action="/update_employee", method="get">
         <button type="submit">Update Employees</button>
-
-
 
     </form>
 

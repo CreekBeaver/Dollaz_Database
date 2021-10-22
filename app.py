@@ -21,8 +21,30 @@ def delete(table_id, primary_key, value):
 	query = 'DELETE FROM ' + table_id + ' '
 	query += 'WHERE '
 	query = query + primary_key + '=' + value + ";"
+	db.execute_query(db_connection=db_connection, query=query)
 
-	return query
+
+
+def select_data(table_name):
+	"""
+	Performs a query for a given table to return all data.
+	:param table_name: String, Consisting of a table name
+	:return: Query from an SQL Tble.
+	"""
+	query = "SELECT * FROM " + table_name + ";"
+	cursor = db.execute_query(db_connection=db_connection, query=query)
+	results = cursor.fetchall()
+	return results
+
+
+def add_row(field_list, insert_list):
+	pass
+
+
+def update_row(table_name, column_1, new_value, key, id):
+	query = "UPDATE " + table_name + " SET " + column_1 + " = " + "'" + new_value + "'" + " "
+	query = query + "WHERE " + key + " = " + id + ';'
+	db.execute_query(db_connection=db_connection, query=query)
 
 
 @app.route('/')
@@ -30,7 +52,7 @@ def root():
 	return render_template("index.j2")
 
 
-@app.route('/customers')
+@app.route('/customer')
 def customers():
 	return render_template("customer.j2", customers=results)
 
@@ -39,13 +61,48 @@ def customers():
 def derivative_data():
 	return render_template('derivative_data.j2', derivatives=results)
 
-@app.route('/update_employees', methods=['GET','POST'])
-def update_employees():
-	return render_template('update_employee.j2', employees=results)
 
-@app.route('/employees', methods=['GET', 'POST'])
+@app.route('/update_employee', methods=['GET','POST'])
+def update_employees():
+	if request.method == "GET":
+		results = select_data('employee')
+		return render_template('update_employee.j2', employees=results)
+	if request.method == "POST":
+		print(request.form)
+		update_row('employee', request.form['column1'], request.form['value1'], 'employee_id', request.form['employee_id'])
+		results = select_data('employee')
+		return render_template('update_employee.j2', employees=results)
+
+
+@app.route('/employee', methods=['GET', 'POST'])
 def employees():
-	return render_template('employees.j2', employees=results)
+
+	if request.method == "GET":
+		results = select_data('employee')
+		return render_template('employee.j2', employees=results)
+	if request.method == "POST":
+		# Handles Adding Rows
+		if "add_row" in request.form.keys():
+			# Create a list that has all the fields for adding a row
+			field_list = ['first_name', 'last_name', 'employment_start_date', 'employment_end_date', 'title', 'salary']
+			value_list = []
+			for field in field_list:
+				if request.form[field] != '':
+					value_list.append(request.form[field])
+
+			# Ensures that all the appropriate fields are handled
+			if len(field_list) == len(value_list):
+				# Make a Call to the Add Row.
+				pass
+
+			# Need a way to pass an error message to the user. Right Now there is just a Non Action.
+
+		# Handles Deletion of Rows
+		if "delete" in request.form.keys():
+			delete('employee', 'employee_id', request.form['delete'])
+
+		results = select_data('employee')
+		return render_template('employee.j2', employees=results)
 
 
 @app.route('/jet_data')
