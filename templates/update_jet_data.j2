@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jet Data</title>
+</head>
+<body>
+    <h1>Welcome to the Update Jet Data Page</h1>
+    <p>
+        <ol>
+            <li> Select the Radio button associated with the Field you wish to change</li>
+            <li> Enter Into the Text Box the New Desired Value </li>
+            <li> Enter the Jet ID which you would like to change </li>
+            <li> Click "Submit". If Changes are accepted, the Table will be Revised. </li>
+
+        </ol>
+    </p>
+
+
+     <table>
+    <! -- This is what establishes the Table -->
+    <thead>
+        <tr>
+            <th>Jet ID</th>
+            <th>Derivative ID</th>
+            <th>Number of Engines</th>
+            <th>Flight Cycles</th>
+            <th>Market Value</th>
+            <th>Payload</th>
+        </tr>
+
+    <tbody>
+    <!-- Now, iterate through every person in bsg_people -->
+    {% for person in jets %}
+        <tr>
+            <!-- Then iterate through every key in the current person dictionary -->
+            {% for key in person.keys() %}
+            <!-- Create a <td> element with the value of that key in it -->
+            <td>{{person[key]}}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+    </table>
+----------------------------------------
+
+----------------------------------------
+<br>UPDATE jet_id SET<br>
+<form action="/update_employee" method="post">
+    <input type="radio", name="column1" value="derivative_id" id="derivative_id">
+    <label for="derivative_id">Derivative ID</label>
+    <br>
+    <input type="radio", name="column1" value="num_engine" id="num_engine">
+    <label for="num_engine">Number of Engines</label>
+    <br>
+    <input type="radio", name="column1" value="flight_cycle" id="flight_cycle">
+    <label for="flight_cycle">Flight Cycles</label>
+    <br>
+    <input type="radio", name="column1" value="market_value" id="market_value">
+    <label for="market_value">Market Value</label>
+    <br>
+    <input type="radio", name="column1" value="payload" id="payload">
+    <label for="payload">Payload</label>
+    <br>
+
+=
+<input type="text" name="value1"><br>
+WHERE
+<br>
+jet_id
+<br>
+=
+<input type="number" name="jet_id">
+<button type="submit">Submit Button</button>
+</form>
+
+
+</body>
+</html>

@@ -54,16 +54,22 @@ def root():
 
 @app.route('/customer')
 def customers():
-	return render_template("customer.j2", customers=results)
+	if request.method == "GET":
+		results = select_data('customer')
+		return render_template('customer.j2', customers=results)
+	if request.method == "POST":
+		results = select_data('customer')
+		return render_template("customer.j2", customers=results)
 
-
-@app.route('/derivative_data')
-def derivative_data():
-	return render_template('derivative_data.j2', derivatives=results)
+@app.route('/update_customer', methods=['GET','POST'])
+def update_customer():
+	if request.method == "GET":
+		results = select_data('customer')
+		return render_template('update_customer.j2', customers=results)
 
 
 @app.route('/update_employee', methods=['GET','POST'])
-def update_employees():
+def update_employee():
 	if request.method == "GET":
 		results = select_data('employee')
 		return render_template('update_employee.j2', employees=results)
@@ -75,7 +81,7 @@ def update_employees():
 
 
 @app.route('/employee', methods=['GET', 'POST'])
-def employees():
+def employee():
 
 	if request.method == "GET":
 		results = select_data('employee')
@@ -104,11 +110,29 @@ def employees():
 		results = select_data('employee')
 		return render_template('employee.j2', employees=results)
 
+@app.route('/update_jet_data')
+def update_jet_data():
+	if request.method == "GET":
+		results = select_data('jet_data')
+		return render_template('update_jet_data.j2', jets=results)
 
 @app.route('/jet_data')
 def jet_data():
-	return render_template('jet_data.j2', jets=results)
+	if request.method == "GET":
+		results = select_data('jet_data')
+		return render_template('jet_data.j2', jets=results)
 
+@app.route('/derivative_data')
+def derivative_data():
+	if request.method == "GET":
+		results = select_data('derivative_data')
+		return render_template('derivative_data.j2', data=results)
+
+@app.route('/update_derivative_data')
+def update_derivative_data():
+	if request.method == "GET":
+		results = select_data('derivative_data')
+		return render_template('update_derivative_data.j2', data=results)
 
 @app.route('/lease_requests')
 def lease_requests():

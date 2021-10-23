@@ -5,34 +5,92 @@
     <title>Derivative Data</title>
 </head>
 <body>
-    <p>Derivative Data</p>
-    <table>
-<thead>
-<tr>
-    <!-- Iterate through each key in the first entry to get the
-    column name -->
-    {% for key in derivatives[0].keys() %}
+    <h1>Welcome to the Derivative Data Page</h1>
+    <p>
+        <ul>
+            <li> View, Insert, and Delete Values from the Derivative Data Table Below</li>
+            <li> Click the "Update" Button to Update an Existing Row</li>
+            <li> Apply Filters to Change the View of the Table Below</li>
+        </ul>
+    </p>
 
-    <!-- Create a <th> tag with the key inside of it, this will be
-    our header row -->
-    <th>{{ key }}</th>
 
-    <!-- End of this for loop -->
-    {% endfor %}
-</tr>
-<tbody>
+     <table>
+    <! -- This is what establishes the Table -->
+    <thead>
+        <tr>
+            <th>Derivative ID</th>
+            <th>Model Derivative</th>
+            <th>Body Style</th>
+            <th>Primary Use</th>
+            <th>Flight Range (Miles)</th>
+            <th>Max Seating</th>
+            <th>Fuel Efficiency (gallons / mile)</th>
+            <th>Max Takeoff Weight (lbs)</th>
+        </tr>
+        <form action="/derivative_data" method="post">
+            <tr>
+                {% for key in data[0].keys() %}
+                <!-- Create a <th> tag with the key inside of it, this will be our header row -->
+                <th><input type="text" name="{{ key }}"></th>
+                <!-- End of this for loop -->
+                {% endfor %}
+                <th><button type="submit" name="add_row" value="execute">Add Row</button></th>
+            </tr>
+        </form>
+    </thead>
+    <tbody>
 
-<!-- Now, iterate through every person in bsg_people -->
-{% for person in derivatives %}
-<tr>
+    <!-- Now, iterate through every person in bsg_people -->
+    {% for person in data %}
+        <tr>
     <!-- Then iterate through every key in the current person dictionary -->
     {% for key in person.keys() %}
 
     <!-- Create a <td> element with the value of that key in it -->
-    <td>{{person[key]}}</td>
+            <td>{{person[key]}}</td>
     {% endfor %}
-</tr>
-{% endfor %}
-</table>
+            <td>
+                <form action="/derivative_data" method="post">
+                <button type="submit" name="delete", value="{{ person['derivative_id'] }}">Delete</button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+--------------------------------------
+    <p> Apply Filters Here</p>
+    <form action="'/derivative_data" method="post">
+        <input type="checkbox" id="derivative_id" value="derivative_id">
+        <label for="derivative_id">Derivative ID</label>
+        <br>
+        <input type="checkbox" id="model_derivative" value="model_derivative">
+        <label for="model_derivative">Model Derivative</label>
+        <br>
+        <input type="checkbox" id="primary_use" value="primary_use">
+        <label for="primary_use">Primary Use</label>
+        <br>
+        <input type="checkbox" id="flight_range" value="flight_range">
+        <label for="flight_range">Flight Range</label>
+        <br>
+        <input type="checkbox" id="max_seating" value="max_seating">
+        <label for="max_seating">Max Seating</label>
+        <br>
+        <input type="checkbox" id="fuel_efficiency" value="fuel_efficiency">
+        <label for="fuel_efficiency">Fuel Efficiency</label>
+        <br>
+        <input type="checkbox" id="max_takeoff_weight" value="max_takeoff_weight">
+        <label for="max_takeoff_weight">Max Takeoff Weight</label>
+        <br>
+        <button type="submit" name="filter", value="filter">Apply Filter</button>
+    </form>
+
+    -----------------------------------------
+    <form action="/update_derivative_data"  method="get">
+        <button type="submit">Update Derivative Data</button>
+
+    </form>
+
 </body>
 </html>

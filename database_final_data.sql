@@ -44,10 +44,10 @@ DROP TABLE IF EXISTS `jet_data`;
 CREATE TABLE `jet_data` (
 	`jet_id` int(11) NOT NULL AUTO_INCREMENT,
 	`derivative_id` int(11) NOT NULL,
-	`num_engine` int(11) NOT NULL,
-	`flight_cycle` int(11) NOT NULL,
+	`num_engine1 int NOT NULL,
+	`flight_cycle` in NOT NULL,
 	`market_value` int(11) NOT NULL,
-	`payload` int(11) NOT NULL,
+	`payload` int NOT NULL,
 	PRIMARY KEY(`jet_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
@@ -56,7 +56,7 @@ CREATE TABLE `jet_data` (
 --
 
 LOCK TABLES `jet_data` WRITE;
-INSERT INTO `jet_data` VALUES (1,2,1,1,78900000,100), (2,3,2,2,54100000,200), (3,1,3,3,41200000,300), (4,4,4,4,39300000,400);
+INSERT INTO `jet_data` VALUES (1,2,'2011-10-12',NULL,78900000,'on-lease'), (2,3,'2013-05-29',NULL,54100000,'on-lease'), (3,1,'2021-12-03',NULL,41200000,'on-lease'), (4,4,'2019-10-09',NULL,39300000,'on-lease');
 UNLOCK TABLES;
 
 --

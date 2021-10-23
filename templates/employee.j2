@@ -7,8 +7,11 @@
 <body>
     <h1>Welcome to the Employee Page</h1>
     <p>
-        View, Insert and Delete Values from The Employee Table Below.<br>
-        Click the "Update" button to Update an existing Row.
+        <ul>
+            <li> View, Insert, and Delete Values from the Employee Table Below</li>
+            <li> Click the "Update" Button to Update an Existing Row</li>
+            <li> Apply Fliters to Change the View of the Table Below</li>
+        </ul>
     </p>
 
 
@@ -34,6 +37,7 @@
                 <th><button type="submit" name="add_row" value="execute">Add Row</button></th>
             </tr>
         </form>
+    </thead>
     <tbody>
 
     <!-- Now, iterate through every person in bsg_people -->
@@ -52,11 +56,40 @@
             </td>
         </tr>
     {% endfor %}
+    </tbody>
     </table>
+--------------------------------------
+    <p> Apply Filters Here</p>
+    <form action="'/employee" method="post">
+        <input type="checkbox" id="employee_id" value="employee_id">
+        <label for="employee_id">Employee ID</label>
+        <br>
+        <input type="checkbox" id="first_name" value="first_name">
+        <label for="first_name">First Name</label>
+        <br>
+        <input type="checkbox" id="last_name" value="last_name">
+        <label for="last_name">Last Name</label>
+        <br>
+        <input type="checkbox" id="employment_start_date" value="employment_start_date">
+        <label for="employment_start_date">Employment Start Date</label>
+        <br>
+        <input type="checkbox" id="employment_end_date" value="employment_end_date">
+        <label for="employment_end_date">Employment End Date</label>
+        <br>
+        <input type="checkbox" id="title" value="title">
+        <label for="employee_id">Title</label>
+        <br>
+        <input type="checkbox" id="salary" value="salary">
+        <label for="salary">Salary</label>
+        <br>
+        <button type="submit" name="filter", value="filter">Apply Filter</button>
 
+
+
+    </form>
 
     -----------------------------------------
-    <form action="/update_employee", method="get">
+    <form action="/update_employee"  method="get">
         <button type="submit">Update Employees</button>
 
     </form>
