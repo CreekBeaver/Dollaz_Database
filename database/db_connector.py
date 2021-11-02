@@ -6,10 +6,16 @@ from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 
 # Set the variables in our application with those environment variables
-host = os.environ.get("340DBHOST")
-user = os.environ.get("340DBUSER")
-passwd = os.environ.get("340DBPW")
-db = os.environ.get("340DB")
+#host = os.environ.get("340DBHOST")
+#user = os.environ.get("340DBUSER")
+#passwd = os.environ.get("340DBPW")
+#db = os.environ.get("340DB")
+
+# THis is simply for testing purposes
+host = 'classmysql.engr.oregonstate.edu'      # MUST BE THIS
+user = 'cs340_creekk'       # don't forget the CS_340 prefix
+passwd = '4515'               # should only be 4 digits if default
+db = 'cs340_creekK'
 
 def connect_to_database(host = host, user = user, passwd = passwd, db = db):
     '''
