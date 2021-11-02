@@ -2,17 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Jet Data</title>
+    <title>Update Jet Data</title>
 </head>
 <body>
     <h1>Welcome to the Update Jet Data Page</h1>
     <p>
         <ol>
-            <li> Select the Radio button associated with the Field you wish to change</li>
-            <li> Enter Into the Text Box the New Desired Value </li>
-            <li> Enter the Jet ID which you would like to change </li>
-            <li> Click "Submit". If Changes are accepted, the Table will be Revised. </li>
-
+            <li>Update the information in the text Boxes</li>
+            <li>When you are pleased with the data, Click "Submit"</li>
+            <li>If the refresh page does not display your update, something went wrong</li>
         </ol>
     </p>
 
@@ -40,39 +38,23 @@
             {% endfor %}
         </tr>
     {% endfor %}
+        <tr>
+            <form action="/jet_data" method="post">
+                <td> </td>
+                <td><input type="text" name="derivative_id" value="{{ jets[0]['derivative_id'] }}"></td>
+                <td><input type="text" name="num_engine" value="{{ jets[0]['num_engine'] }}" ></td>
+                <td><input type="text" name="flight_cycle" value="{{ jets[0]['flight_cycle'] }}"></td>
+                <td><input type="text" name="market_value" value="{{ jets[0]['market_value'] }}"></td>
+                <td><input type="text" name="payload" value="{{ jets[0]['payload'] }}"></td>
+                <td>
+                    <button type="submit" name="update" value="{{ jets[0]['jet_id'] }}">Submit Updates</button>
+                </td>
+
+            </form>
+        </tr>
     </table>
 ----------------------------------------
 
 ----------------------------------------
-<br>UPDATE jet_id SET<br>
-<form action="/update_employee" method="post">
-    <input type="radio", name="column1" value="derivative_id" id="derivative_id">
-    <label for="derivative_id">Derivative ID</label>
-    <br>
-    <input type="radio", name="column1" value="num_engine" id="num_engine">
-    <label for="num_engine">Number of Engines</label>
-    <br>
-    <input type="radio", name="column1" value="flight_cycle" id="flight_cycle">
-    <label for="flight_cycle">Flight Cycles</label>
-    <br>
-    <input type="radio", name="column1" value="market_value" id="market_value">
-    <label for="market_value">Market Value</label>
-    <br>
-    <input type="radio", name="column1" value="payload" id="payload">
-    <label for="payload">Payload</label>
-    <br>
-
-=
-<input type="text" name="value1"><br>
-WHERE
-<br>
-jet_id
-<br>
-=
-<input type="number" name="jet_id">
-<button type="submit">Submit Button</button>
-</form>
-
-
 </body>
 </html>

@@ -8,7 +8,7 @@
     <h1>Welcome to the Jet Data Page</h1>
     <p>
         <ul>
-            <li> View, Insert, and Delete Values from the Jet Data Table Below</li>
+            <li> View, Insert, and Delete Values from the Customer Table Below</li>
             <li> Click the "Update" Button to Update an Existing Row</li>
             <li> Apply Filters to Change the View of the Table Below</li>
         </ul>
@@ -53,6 +53,11 @@
                 <button type="submit" name="delete", value="{{ person['jet_id'] }}">Delete</button>
                 </form>
             </td>
+            <td>
+                <form action="/update_jet_data" method="get">
+                <button type="submit" name="update" value="{{ person['jet_id'] }}">Update</button>
+                </form>
+            </td>
         </tr>
     {% endfor %}
     </tbody>
@@ -79,10 +84,5 @@
     </form>
 
     -----------------------------------------
-    <form action="/update_jet_data"  method="get">
-        <button type="submit">Update Jet Data</button>
-
-    </form>
-
 </body>
 </html>

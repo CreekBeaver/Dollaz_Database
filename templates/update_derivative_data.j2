@@ -42,44 +42,27 @@
             {% endfor %}
         </tr>
     {% endfor %}
+        <tr>
+            <form action="/derivative_data" method="post">
+                <td> </td>
+
+                <td><input type="text" name="model_derivative" value="{{ data[0]['model_derivative'] }}" ></td>
+                <td><input type="text" name="body_style" value="{{ data[0]['body_style'] }}" ></td>
+                <td><input type="text" name="primary_use" value="{{ data[0]['primary_use'] }}" ></td>
+                <td><input type="text" name="flight_range" value="{{ data[0]['flight_range'] }}"></td>
+                <td><input type="text" name="max_seating" value="{{ data[0]['max_seating'] }}" ></td>
+                <td><input type="text" name="fuel_efficiency" value="{{ data[0]['fuel_efficiency'] }}"></td>
+                <td><input type="text" name="max_takeoff_weight" value="{{ data[0]['max_takeoff_weight'] }}"></td>
+                <td>
+                    <button type="submit" name="update" value="{{ data[0]['derivative_id'] }}">Submit Updates</button>
+                </td>
+
+            </form>
+        </tr>
     </table>
 ----------------------------------------
 
 ----------------------------------------
-<br>UPDATE employee SET<br>
-<form action="/update_derivative_data" method="post">
-    <input type="radio", name="column1" value="model_derivative" id="model_derivative">
-    <label for="model_derivative">Model Derivative</label>
-    <br>
-    <input type="radio", name="column1" value="body_style" id="body_style">
-    <label for="body_style">Body Style</label>
-    <br>
-    <input type="radio", name="column1" value="primary_use" id="primary_use">
-    <label for="primary_use">Primary Use</label>
-    <br>
-    <input type="radio", name="column1" value="flight_range" id="flight_range">
-    <label for="flight_range">Flight Range</label>
-    <br>
-    <input type="radio", name="column1" value="max_seating" id="max_seating">
-    <label for="max_seating">Max Seating</label>
-    <br>
-    <input type="radio", name="column1" value="fuel_efficiency" id="fuel_efficiency">
-    <label for="fuel_efficiency">Fuel Efficiency</label>
-    <br>
-    <input type="radio", name="column1" value="max_takeoff_weight" id="max_takeoff_weight">
-    <label for="max_takeoff_weight">MTOW</label>
-    <br>
-=
-<input type="text" name="value1"><br>
-WHERE
-<br>
-derivative_id
-<br>
-=
-<input type="number" name="derivative_id">
-<button type="submit">Submit Button</button>
-</form>
-
 
 </body>
 </html>

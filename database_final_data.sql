@@ -60,7 +60,7 @@ CREATE TABLE `derivative_data` (
 	`flight_range` int(11) NOT NULL,
 	`max_seating` int(11) NOT NULL,
 	`fuel_efficiency` float NOT NULL,
-	`max_take_off_weight` float NOT NULL,
+	`max_takeoff_weight` float NOT NULL,
 	PRIMARY KEY(`derivative_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 

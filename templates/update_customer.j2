@@ -2,17 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Customers</title>
+    <title>Update Customers</title>
 </head>
 <body>
     <h1>Welcome to the Update Customer Page</h1>
     <p>
         <ol>
-            <li> Select the Radio button associated with the Field you wish to change</li>
-            <li> Enter Into the Text Box the New Desired Value </li>
-            <li> Enter the Customer ID which you would like to change </li>
-            <li> Click "Submit". If Changes are accepted, the Table will be Revised. </li>
-
+            <li>Update the information in the text Boxes</li>
+            <li>When you are pleased with the data, Click "Submit"</li>
+            <li>If the refresh page does not display your update, something went wrong</li>
         </ol>
     </p>
 
@@ -38,32 +36,21 @@
             {% endfor %}
         </tr>
     {% endfor %}
+      <tr>
+            <form action="/customer" method="post">
+                <td> </td>
+                <td><input type="text" name="name" value="{{ customers[0]['name'] }}" ></td>
+                <td><input type="text" name="contact_number" value="{{ customers[0]['contact_num'] }}" ></td>
+                <td><input type="text" name="address" value="{{ customers[0]['address'] }}" ></td>
+                <td>
+                    <button type="submit" name="update" value="{{ customers[0]['customer_id'] }}">Submit Updates</button>
+                </td>
+
+            </form>
+        </tr>
     </table>
-----------------------------------------
 
-----------------------------------------
-<br>UPDATE customer SET<br>
-<form action="/update_customer" method="post">
-    <input type="radio", name="column1" value="name" id="name">
-    <label for="name">Customer Name</label>
-    <br>
-    <input type="radio", name="column1" value="contact_num" id="contact_num">
-    <label for="contact_num">Contact Number</label>
-    <br>
-    <input type="radio", name="column1" value="address" id="address">
-    <label for="address">Address</label>
-    <br>
 
-=
-<input type="text" name="value1"><br>
-WHERE
-<br>
-customer_id
-<br>
-=
-<input type="number" name="customer_id">
-<button type="submit">Submit Button</button>
-</form>
 
 
 </body>
