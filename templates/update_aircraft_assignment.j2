@@ -2,9 +2,64 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Leases</title>
+    <title>Customers</title>
 </head>
 <body>
-    <p>Leases</p>
+    <h1>Welcome to the Update Customer Page</h1>
+    <p>
+        <ol>
+            <li> Select the Radio button associated with the Field you wish to change</li>
+            <li> Enter Into the Text Box the New Desired Value </li>
+            <li> Enter the Aircraft Lease ID which you would like to change </li>
+            <li> Click "Submit". If Changes are accepted, the Table will be Revised. </li>
+
+        </ol>
+    </p>
+
+
+     <table>
+    <! -- This is what establishes the Table -->
+    <thead>
+        <tr>
+            <th>Lease ID</th>
+            <th>Employee ID</th>
+        </tr>
+
+    <tbody>
+    <!-- Now, iterate through every person in bsg_people -->
+    {% for person in assignments %}
+        <tr>
+            <!-- Then iterate through every key in the current person dictionary -->
+            {% for key in person.keys() %}
+            <!-- Create a <td> element with the value of that key in it -->
+            <td>{{person[key]}}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+    </table>
+----------------------------------------
+
+----------------------------------------
+<br>UPDATE customer SET<br>
+<form action="/update_customer" method="post">
+    <input type="radio", name="column1" value="lease_id" id="lease_id">
+    <label for="lease_id">Lease ID</label>
+    <br>
+    <input type="radio", name="column1" value="employee_id" id="employee_id">
+    <label for="employee_id">Employee ID</label>
+    <br>
+
+=
+<input type="text" name="value1"><br>
+WHERE
+<br>
+lease_id
+<br>
+=
+<input type="number" name="lease_id">
+<button type="submit">Submit Button</button>
+</form>
+
+
 </body>
 </html>

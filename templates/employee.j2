@@ -7,6 +7,7 @@
 <body>
     <h1>Welcome to the Employee Page</h1>
     <p>
+
         <ul>
             <li> View, Insert, and Delete Values from the Employee Table Below</li>
             <li> Click the "Update" Button to Update an Existing Row</li>
@@ -29,7 +30,7 @@
         </tr>
         <form action="/employee" method="post">
             <tr>
-                {% for key in employees[0].keys() %}
+                {% for key in data[0].keys() %}
                 <!-- Create a <th> tag with the key inside of it, this will be our header row -->
                 <th><input type="text" name="{{ key }}"></th>
                 <!-- End of this for loop -->
@@ -37,28 +38,38 @@
                 <th><button type="submit" name="add_row" value="execute">Add Row</button></th>
             </tr>
         </form>
+
     </thead>
     <tbody>
 
     <!-- Now, iterate through every person in bsg_people -->
-    {% for person in employees %}
+    {% for thing in data %}
         <tr>
     <!-- Then iterate through every key in the current person dictionary -->
-    {% for key in person.keys() %}
+    {% for key in thing.keys() %}
 
     <!-- Create a <td> element with the value of that key in it -->
-            <td>{{person[key]}}</td>
+            <td>{{thing[key]}}</td>
     {% endfor %}
             <td>
                 <form action="/employee" method="post">
-                <button type="submit" name="delete", value="{{ person['employee_id'] }}">Delete</button>
+                <button type="submit" name="delete", value="{{ thing['employee_id'] }}">Delete</button>
+                </form>
+            </td>
+            <td>
+                <form action="/update_employee" method="get">
+                <button type="submit" name="update" value="{{ thing['employee_id'] }}">Update</button>
                 </form>
             </td>
         </tr>
     {% endfor %}
+
     </tbody>
     </table>
 --------------------------------------
+    <p>
+
+    </p>
     <p> Apply Filters Here</p>
     <form action="'/employee" method="post">
         <input type="checkbox" id="employee_id" value="employee_id">
@@ -83,16 +94,9 @@
         <label for="salary">Salary</label>
         <br>
         <button type="submit" name="filter", value="filter">Apply Filter</button>
-
-
-
     </form>
 
     -----------------------------------------
-    <form action="/update_employee"  method="get">
-        <button type="submit">Update Employees</button>
-
-    </form>
 
 </body>
 </html>

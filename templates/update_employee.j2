@@ -2,17 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Employee</title>
+    <title>Update Employee</title>
 </head>
 <body>
     <h1>Welcome to the Update Employee Page</h1>
     <p>
         <ol>
-            <li> Select the Radio button associated with the Field you wish to change</li>
-            <li> Enter Into the Text Box the New Desired Value </li>
-            <li> Enter the Employee ID which you would like to change </li>
-            <li> Click "Submit". If Changes are accepted, the Table will be Revised. </li>
-
+            <li>Update the information in the text Boxes</li>
+            <li>When you are pleased with the data, Click "Submit"</li>
+            <li>If the refresh page does not display your update, something went wrong</li>
         </ol>
     </p>
 
@@ -28,54 +26,38 @@
             <th>Employment End Date</th>
             <th>Title</th>
             <th>Salary ($)</th>
+            <th>Click to Update</th>
         </tr>
 
     <tbody>
     <!-- Now, iterate through every person in bsg_people -->
-    {% for person in employees %}
+    {% for thing in data %}
         <tr>
             <!-- Then iterate through every key in the current person dictionary -->
-            {% for key in person.keys() %}
+            {% for key in thing.keys() %}
             <!-- Create a <td> element with the value of that key in it -->
-            <td>{{person[key]}}</td>
+            <td>{{thing[key]}}
+            </td>
             {% endfor %}
         </tr>
     {% endfor %}
+        <tr>
+            <form action="/employee" method="post">
+                <td> </td>
+                <td><input type="text" name="first_name" value="{{ data[0]['first_name'] }}" ></td>
+                <td><input type="text" name="last_name" value="{{ data[0]['last_name'] }}" ></td>
+                <td><input type="text" name="employment_start_date" value="{{ data[0]['employment_start_date'] }}" ></td>
+                <td><input type="text" name="employment_end_date" value="{{ data[0]['employment_end_date'] }}"></td>
+                <td><input type="text" name="title" value="{{ data[0]['title'] }}" ></td>
+                <td><input type="text" name="salary" value="{{ data[0]['salary'] }}"></td>
+                <td>
+                    <button type="submit" name="update" value="{{ data[0]['employee_id'] }}">Submit Updates</button>
+                </td>
+
+            </form>
+        </tr>
     </table>
 ----------------------------------------
-
-----------------------------------------
-<br>UPDATE employee SET<br>
-<form action="/update_employee" method="post">
-    <input type="radio", name="column1" value="first_name" id="first_name">
-    <label for="first_name">First Name</label>
-    <br>
-    <input type="radio", name="column1" value="last_name" id="last_name">
-    <label for="last_name">Last Name</label>
-    <br>
-    <input type="radio", name="column1" value="employee_start_date" id="employee_start_date">
-    <label for="employee_start_date">Employee Start Date (YYYY-MM-DD)</label>
-    <br>
-    <input type="radio", name="column1" value="employee_end_date" id="employee_end_date">
-    <label for="employee_end_date">Employee End Date (YYYY-MM-DD)</label>
-    <br>
-    <input type="radio", name="column1" value="title" id="title">
-    <label for="title">Title</label>
-    <br>
-    <input type="radio", name="column1" value="salary" id="salary">
-    <label for="salary">Salary</label>
-    <br>
-=
-<input type="text" name="value1"><br>
-WHERE
-<br>
-employee_id
-<br>
-=
-<input type="number" name="employee_id">
-<button type="submit">Submit Button</button>
-</form>
-
-
+<p>{{ data['first_name'] }} testing</p>
 </body>
 </html>

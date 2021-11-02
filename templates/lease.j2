@@ -2,9 +2,116 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Leases</title>
+    <title>Lease</title>
 </head>
 <body>
-    <p>Leases</p>
+    <h1>Welcome to the Lease Page</h1>
+    <p>
+        <ul>
+            <li> View, Insert, and Delete Values from the Lease Table Below</li>
+            <li> Click the "Update" Button to Update an Existing Row</li>
+            <li> Apply Filters to Change the View of the Table Below</li>
+        </ul>
+    </p>
+
+
+     <table>
+    <! -- This is what establishes the Table -->
+    <thead>
+        <tr>
+            <th>Lease ID</th>
+            <th>Customer ID</th>
+            <th>Jet ID</th>
+            <th>Lease Status</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Duration</th>
+            <th>Ground Staff Included</th>
+            <th>Crew Included</th>
+            <th>Lease Value</th>
+            <th>Payment To Date</th>
+            <th>Payment Remaining</th>
+        </tr>
+        <form action="/lease" method="post">
+            <tr>
+                {% for key in leases[0].keys() %}
+                <!-- Create a <th> tag with the key inside of it, this will be our header row -->
+                <th><input type="text" name="{{ key }}"></th>
+                <!-- End of this for loop -->
+                {% endfor %}
+                <th><button type="submit" name="add_row" value="execute">Add Row</button></th>
+            </tr>
+        </form>
+    </thead>
+    <tbody>
+
+    <!-- Now, iterate through every person in bsg_people -->
+    {% for person in leases %}
+        <tr>
+    <!-- Then iterate through every key in the current person dictionary -->
+    {% for key in person.keys() %}
+
+    <!-- Create a <td> element with the value of that key in it -->
+            <td>{{person[key]}}</td>
+    {% endfor %}
+            <td>
+                <form action="/lease" method="post">
+                <button type="submit" name="delete", value="{{ person['lease_id'] }}">Delete</button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+--------------------------------------
+    <p> Apply Filters Here</p>
+    <form action="'/lease" method="post">
+        <input type="checkbox" id="lease_id" value="lease_id">
+        <label for="lease_id">Lease ID</label>
+        <br>
+        <input type="checkbox" id="customer_id" value="customer_id">
+        <label for="customer_id">Customer ID</label>
+        <br>
+        <input type="checkbox" id="jet_id" value="jet_id">
+        <label for="jet_id">Jet ID</label>
+        <br>
+        <input type="checkbox" id="lease_status" value="lease_status">
+        <label for="lease_status">Lease Status</label>
+        <br>
+        <input type="checkbox" id="start_date" value="start_date">
+        <label for="start_date">Start Date</label>
+        <br>
+        <input type="checkbox" id="end_date" value="end_date">
+        <label for="end_date">End Date</label>
+        <br>
+        <input type="checkbox" id="duration" value="duration">
+        <label for="duration">Duration</label>
+        <br>
+        <input type="checkbox" id="ground_staff_included" value="ground_staf_included">
+        <label for="ground_staff_included">Ground Staff Included</label>
+        <br>
+        <input type="checkbox" id="crew_included" value="crew_included">
+        <label for="crew_included">Crew Included</label>
+        <br>
+        <input type="checkbox" id="lease_value" value="lease_value">
+        <label for="lease_value">Lease Value</label>
+        <br>
+        <input type="checkbox" id="payment_to_date" value="payment_to_date">
+        <label for="payment_to_date">Payment To Date</label>
+        <br>
+        <input type="checkbox" id="payment_remaining" value="payment_remaining">
+        <label for="payment_remaining">Payment Remaining</label>
+        <button type="submit" name="filter", value="filter">Apply Filter</button>
+
+
+
+    </form>
+
+    -----------------------------------------
+    <form action="/update_lease"  method="get">
+        <button type="submit">Update Lease</button>
+
+    </form>
+
 </body>
 </html>

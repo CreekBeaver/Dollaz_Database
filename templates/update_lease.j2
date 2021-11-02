@@ -2,58 +2,94 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Employess</title>
+    <title>Update Lease</title>
 </head>
 <body>
-    <p>Employees</p>
+    <h1>Welcome to the Update Lease Page</h1>
+    <p>
+        <ol>
+            <li> Select the Radio button associated with the Field you wish to change</li>
+            <li> Enter Into the Text Box the New Desired Value </li>
+            <li> Enter the Lease ID which you would like to change </li>
+            <li> Click "Submit". If Changes are accepted, the Table will be Revised. </li>
+
+        </ol>
+    </p>
 
 
      <table>
     <! -- This is what establishes the Table -->
     <thead>
         <tr>
-        <!-- Iterate through each key in the first entry to get the column name -->
-        {% for key in employees[0].keys() %}
-
-        <!-- Create a <th> tag with the key inside of it, this will be our header row -->
-        <th>{{ key }}</th>
-
-        <!-- End of this for loop -->
-         {% endfor %}
+            <th>Lease ID</th>
+            <th>Customer ID</th>
+            <th>Jet ID</th>
+            <th>Lease Status</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Duration</th>
+            <th>Ground Staff Included</th>
+            <th>Crew Included</th>
+            <th>Lease Value</th>
+            <th>Payment To Date</th>
+            <th>Payment Remaining</th>
         </tr>
+
     <tbody>
-
     <!-- Now, iterate through every person in bsg_people -->
-    {% for person in employees %}
+    {% for person in customers %}
         <tr>
-    <!-- Then iterate through every key in the current person dictionary -->
-    {% for key in person.keys() %}
-
-    <!-- Create a <td> element with the value of that key in it -->
+            <!-- Then iterate through every key in the current person dictionary -->
+            {% for key in person.keys() %}
+            <!-- Create a <td> element with the value of that key in it -->
             <td>{{person[key]}}</td>
-    {% endfor %}
+            {% endfor %}
         </tr>
     {% endfor %}
     </table>
+----------------------------------------
 
-    ----------------------------------------
-<br>UPDATE employees SET<br>
-<form action="/update_employees" method="post">
-    <!-- Iterate through each key in the first entry to get the column name -->
-    {% for key in employees[0].keys() %}
-    <input type="radio", name="column1" value="{{ key }}" id="{{ key }}">
-    <label for="{{ key }}">{{ key }}</label>
+----------------------------------------
+<br>UPDATE lease SET<br>
+<form action="/update_lease" method="post">
+    <input type="radio", name="column1" value="customer_id" id="customer_id">
+    <label for="customer_id">Customer ID</label>
     <br>
-<!-- End of this for loop -->
-    {% endfor %}
+    <input type="radio", name="column1" value="jet_id" id="jet_id">
+    <label for="jet_id">Jet ID</label>
+    <br>
+    <input type="radio", name="column1" value="lease_status" id="lease_status">
+    <label for="lease_status">Lease Status</label>
+    <br>
+    <input type="radio", name="column1" value="start_date" id="start_date">
+    <label for="start_date">Start Date</label>
+    <br>
+    <input type="radio", name="column1" value="end_date" id="end_date">
+    <label for="end_date">End Date</label>
+    <br>
+    <input type="radio", name="column1" value="duration" id="duration">
+    <label for="duration">Duration</label>
+    <br>
+    <input type="radio", name="column1" value="ground_staff_included" id="ground_staff_included">
+    <label for="ground_staff_included">Ground Staff Included</label>
+    <br>
+    <input type="radio", name="column1" value="lease_value" id="lease_value">
+    <label for="lease_value">Lease Value</label>
+    <br>
+    <input type="radio", name="column1" value="payment_to_date" id="payment_to_date">
+    <label for="payment_to_date">Payment To Date</label>
+    <br>
+    <input type="radio", name="column1" value="payment_remaining" id="payment_remaining">
+    <label for="payment_remaining">Payment Remaining</label>
+    <br>
 =
 <input type="text" name="value1"><br>
-Where
+WHERE
 <br>
-employee_id
+lease_id
 <br>
 =
-<input type="text" name="value2">
+<input type="number" name="lease_id">
 <button type="submit">Submit Button</button>
 </form>
 
