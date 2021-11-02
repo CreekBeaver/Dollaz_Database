@@ -2,17 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Customers</title>
+    <title>Update Aircraft Assignment</title>
 </head>
 <body>
     <h1>Welcome to the Update Customer Page</h1>
     <p>
         <ol>
-            <li> Select the Radio button associated with the Field you wish to change</li>
-            <li> Enter Into the Text Box the New Desired Value </li>
-            <li> Enter the Aircraft Lease ID which you would like to change </li>
-            <li> Click "Submit". If Changes are accepted, the Table will be Revised. </li>
-
+            <li>Update the information in the text Boxes</li>
+            <li>When you are pleased with the data, Click "Submit"</li>
+            <li>If the refresh page does not display your update, something went wrong</li>
         </ol>
     </p>
 
@@ -27,7 +25,7 @@
 
     <tbody>
     <!-- Now, iterate through every person in bsg_people -->
-    {% for person in assignments %}
+    {% for person in data %}
         <tr>
             <!-- Then iterate through every key in the current person dictionary -->
             {% for key in person.keys() %}
@@ -36,30 +34,21 @@
             {% endfor %}
         </tr>
     {% endfor %}
+        <tr>
+            <form action="/aircraft_assignment" method="post">
+                <td> </td>
+                <td><input type="text" name="lease_id" value="{{ data[0]['lease_id'] }}"></td>
+                <td><input type="text" name="employee_id" value="{{ data[0]['employee_id'] }}" ></td>
+                <td>
+                    <button type="submit" name="update" value="{{ data[0]['lease_id'] }}">Submit Updates</button>
+                </td>
+
+            </form>
+        </tr>
     </table>
 ----------------------------------------
 
 ----------------------------------------
-<br>UPDATE customer SET<br>
-<form action="/update_customer" method="post">
-    <input type="radio", name="column1" value="lease_id" id="lease_id">
-    <label for="lease_id">Lease ID</label>
-    <br>
-    <input type="radio", name="column1" value="employee_id" id="employee_id">
-    <label for="employee_id">Employee ID</label>
-    <br>
-
-=
-<input type="text" name="value1"><br>
-WHERE
-<br>
-lease_id
-<br>
-=
-<input type="number" name="lease_id">
-<button type="submit">Submit Button</button>
-</form>
-
 
 </body>
 </html>

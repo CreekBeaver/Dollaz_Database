@@ -158,14 +158,67 @@ def update_derivative_data():
 		query = "SELECT * FROM derivative_data WHERE derivative_id = " + derivative_id + ";"
 		cursor = db.execute_query(db_connection=db_connection, query=query)
 		results = cursor.fetchall()
-		print(results)
 		return render_template('update_derivative_data.j2', data=results)
 
 
-@app.route('/lease')
+@app.route('/lease', methods=["GET", "POST"])
 def lease():
-	return render_template('lease.j2')
+	if request.method == "GET":
+		results = select_data('lease')
+		return render_template('lease.j2', data=results)
+	if request.method == "POST":
+		results = select_data('lease')
+		return render_template('lease.j2', data=results)
 
+
+@app.route('/update_lease', methods=["GET", "POST"])
+def update_lease():
+	if request.method == "GET":
+		lease_id = request.args['update']
+		query = "SELECT * FROM lease WHERE lease_id = " + lease_id + ";"
+		cursor = db.execute_query(db_connection=db_connection, query=query)
+		results = cursor.fetchall()
+		return render_template('lease.j2', data=results)
+
+
+@app.route('/lease_request', methods=["GET", "POST"])
+def lease_request():
+	if request.method == "GET":
+		results = select_data('lease_request')
+		return render_template('lease_request.j2', data=results)
+	if request.method == "POST":
+		results = select_data('lease_request')
+		return render_template('lease_request.j2', data=results)
+
+
+@app.route('/update_lease_request', methods=["GET", "POST"])
+def update_lease_request():
+	if request.method == "GET":
+		request_id = request.args['update']
+		query = "SELECT * FROM lease_request WHERE request_id = " + request_id + ";"
+		cursor = db.execute_query(db_connection=db_connection, query=query)
+		results = cursor.fetchall()
+		return render_template('lease_request.j2', data=results)
+
+
+@app.route('/aircraft_assignment', methods=["GET", "POST"])
+def aircraft_assignment():
+	if request.method == "GET":
+		results = select_data('aircraft_assignment')
+		return render_template('aircraft_assignment.j2', data=results)
+	if request.method == "POST":
+		results = select_data('aircraft_assignment')
+		return render_template('aircraft_assignment.j2', data=results)
+
+
+@app.route('/update_aircraft_assignment', methods=["GET", "POST"])
+def update_aircraft_assignment():
+	if request.method == "GET":
+		lease_id = request.args['update']
+		query = "SELECT * FROM aircraft_assignment WHERE lease_id = " + lease_id + ";"
+		cursor = db.execute_query(db_connection=db_connection, query=query)
+		results = cursor.fetchall()
+		return render_template('aircraft_assignment.j2', data=results)
 
 
 # Listener

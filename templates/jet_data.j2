@@ -8,9 +8,8 @@
     <h1>Welcome to the Jet Data Page</h1>
     <p>
         <ul>
-            <li> View, Insert, and Delete Values from the Customer Table Below</li>
+            <li> View, Insert, and Delete Values from the Jet Data Table Below</li>
             <li> Click the "Update" Button to Update an Existing Row</li>
-            <li> Apply Filters to Change the View of the Table Below</li>
         </ul>
     </p>
 
@@ -62,27 +61,5 @@
     {% endfor %}
     </tbody>
     </table>
---------------------------------------
-    <p> Apply Filters Here</p>
-    <form action="'/jet_data" method="post">
-        <input type="checkbox" id="jet_id" value="jet_id">
-        <label for="jet_id">Jet ID</label>
-        <br>
-        <input type="checkbox" id="derivative_id" value="derivative_id">
-        <label for="derivative_id">Derivative ID</label>
-        <br>
-        <input type="checkbox" id="flight_cycle" value="flight_cycle">
-        <label for="flight_cycle">Flight Cycles</label>
-        <br>
-        <input type="checkbox" id="market_value" value="market_value">
-        <label for="market_value">Market Value</label>
-        <br>
-        <input type="checkbox" id="payload" value="payload">
-        <label for="payload">Payload</label>
-        <br>
-        <button type="submit" name="filter", value="filter">Apply Filter</button>
-    </form>
-
-    -----------------------------------------
 </body>
 </html>

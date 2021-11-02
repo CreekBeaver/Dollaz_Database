@@ -129,53 +129,12 @@ CREATE TABLE `aircraft_assignment` (
 
 -- *** --
 
--- Alter Table To Establish Foreign Keys
-
-ALTER TABLE jet_data
-ADD CONSTRAINT fk_jd_1
-FOREIGN KEY (derivative_id)
-REFERENCES derivative_data(derivative_id)
-ON DELETE CASCADE
-ON UPDATE CASCADE;
-
-ALTER TABLE lease
-ADD CONSTRAINT fk_lease_1
-FOREIGN KEY (customer_id)
-REFERENCES customer(customer_id)
-ON DELETE CASCADE
-ON UPDATE CASCADE,
-
-ADD CONSTRAINT fk_lease_2
-FOREIGN KEY (jet_id)
-REFERENCES jet_data(jet_id)
-ON DELETE CASCADE
-ON UPDATE CASCADE;
-
-ALTER TABLE lease_request
-ADD CONSTRAINT fk_lr_1
-FOREIGN KEY (customer_id)
-REFERENCES customer(customer_id)
-ON DELETE CASCADE
-ON UPDATE CASCADE,
-
-ADD CONSTRAINT fk_lr_2
-FOREIGN KEY (derivative_id)
-REFERENCES derivative_data(derivative_id)
-ON DELETE CASCADE
-ON UPDATE CASCADE;
-
+-- Need To include the Foreign Keys. Refernce the Text 
 
 
 -- *** -- 
 -- Start Data DUMP
-
 --
--- Dump info Into Employees
---
-
-LOCK TABLES `employee` WRITE;
-INSERT INTO `employee` VALUES (1,'Kyle','Creek','2014-05-04',NULL,'Junior Lease Agent',100000), (2,'Chris','Dela Pena','2012-01-01',NULL,'Legal',150000), (3,'Donald','Duck','1996-04-07','2021-03-21','Regional Supervisor',250000), (4,'Brett','Lewis','2001-08-12',NULL,'CEO',1500000);
-UNLOCK TABLES;
 
 --
 -- Dump info into Jet Data'
@@ -186,6 +145,46 @@ INSERT INTO `jet_data` VALUES (1,2,2,1000,78900000,100), (2,3,2,200,54100000,200
 UNLOCK TABLES;
 
 --
+-- Dump Customer 
+--
+LOCK TABLES `customer` WRITE;
+INSERT INTO `customer` VALUES (1,'Southwest Air','800-533-1222','16215 Air Cargo Rd, SeTac, WA 98158'), (2,'Alaska Air','206-433-3200','19300 Intnl Blvd, SeaTac, WA 98188'), (3,'Spirit Airlines','954-447-7828','6542, 2800 Executive Way, Miramar FL, 33025'), (4,'Amazon Air','206-266-1000','410 Terry Ave N. Seattle, WA 98109');
+UNLOCK TABLES;
+
+
+-- 
+-- Dump Leases
+--
+LOCK TABLES `lease` WRITE;
+INSERT INTO `lease` VALUES (1, 4, 3, 'active', '1992-01-01', '2020-01-01', 10, 0, 1, 1000, 1, 24), (2, 2, 2, 'active', '1992-01-01', '2020-01-01', 9, 1, 0, 2000, 1, 23), (3, 1, 4, 'active', '1992-01-01', '2020-01-01', 8, 0, 0, 3000, 1, 22), (4, 3, 1, 'active', '1992-01-01', '2020-01-01', 7, 1, 1, 4000, 1, 21);
+UNLOCK TABLES;
+
+--
+-- Dump Aircraft Assignments
+--
+
+LOCK TABLES `aircraft_assignment` WRITE;
+INSERT INTO `aircraft_assignment` VALUES (1, 3), (2, 2), (3, 1), (4, 3);
+UNLOCK TABLES;
+
+--
+-- Dump info Into Employees
+--
+
+LOCK TABLES `employee` WRITE;
+INSERT INTO `employee` VALUES (1,'Kyle','Creek','2014-05-04',NULL,'Junior Lease Agent',100000), (2,'Chris','Dela Pena','2012-01-01',NULL,'Legal',150000), (3,'Donald','Duck','1996-04-07','2021-03-21','Regional Supervisor',250000), (4,'Brett','Lewis','2001-08-12',NULL,'CEO',1500000);
+UNLOCK TABLES;
+
+--
+-- Dump lease request_id`
+--
+
+LOCK TABLES `lease_request` WRITE;
+INSERT INTO `lease_request` VALUES (1, 4, 2, 1, 1), (2, 2, 3, 0, 1), (3, 3, 1, 1, 0), (4, 1, 4, 0, 0);
+UNLOCK TABLES;
+
+
+--
 -- Dump Derivative Data
 --
 
@@ -193,9 +192,4 @@ LOCK TABLES `derivative_data` WRITE;
 INSERT INTO `derivative_data` VALUES (1,'737 Max 8','narrow-body','passenger',3550,175,110,181200), (2, '747-8','wide-body','freighter',9320,0,89,987000), (3,'787-8','wide-body','passenger',7305,300,104,502500), (4,'A320Neo','narrow-body','passenger',3401,186,97,169756);
 UNLOCK TABLES;
 
---
--- Dump Customer 
---
-LOCK TABLES `customer` WRITE;
-INSERT INTO `customer` VALUES (1,'Southwest Air','800-533-1222','16215 Air Cargo Rd, SeTac, WA 98158'), (2,'Alaska Air','206-433-3200','19300 Intnl Blvd, SeaTac, WA 98188'), (3,'Spirit Airlines','954-447-7828','6542, 2800 Executive Way, Miramar FL, 33025'), (4,'Amazon Air','206-266-1000','410 Terry Ave N. Seattle, WA 98109');
-UNLOCK TABLES;
+

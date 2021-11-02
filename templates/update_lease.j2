@@ -8,11 +8,9 @@
     <h1>Welcome to the Update Lease Page</h1>
     <p>
         <ol>
-            <li> Select the Radio button associated with the Field you wish to change</li>
-            <li> Enter Into the Text Box the New Desired Value </li>
-            <li> Enter the Lease ID which you would like to change </li>
-            <li> Click "Submit". If Changes are accepted, the Table will be Revised. </li>
-
+            <li>Update the information in the text Boxes</li>
+            <li>When you are pleased with the data, Click "Submit"</li>
+            <li>If the refresh page does not display your update, something went wrong</li>
         </ol>
     </p>
 
@@ -37,7 +35,7 @@
 
     <tbody>
     <!-- Now, iterate through every person in bsg_people -->
-    {% for person in customers %}
+    {% for person in data %}
         <tr>
             <!-- Then iterate through every key in the current person dictionary -->
             {% for key in person.keys() %}
@@ -46,53 +44,27 @@
             {% endfor %}
         </tr>
     {% endfor %}
+        <tr>
+            <form action="/lease" method="post">
+                <td> </td>
+                <td><input type="text" name="customer_id" value="{{ data[0]['customer_id'] }}" ></td>
+                <td><input type="text" name="jet_id" value="{{ data[0]['jet_id'] }}" ></td>
+                <td><input type="text" name="lease_status" value="{{ data[0]['lease_status'] }}" ></td>
+                <td><input type="text" name="start_date" value="{{ data[0]['start_date'] }}"></td>
+                <td><input type="text" name="end_date" value="{{ data[0]['end_date'] }}" ></td>
+                <td><input type="text" name="ground_staff_included" value="{{ data[0]['ground_staff_included'] }}"></td>
+                <td><input type="text" name="crew_included" value="{{ data[0]['crew_included'] }}" ></td>
+                <td><input type="text" name="lease_value" value="{{ data[0]['lease_value'] }}" ></td>
+                <td><input type="text" name="payment_to_date" value="{{ data[0]['payment_to_date'] }}"></td>
+                <td><input type="text" name="payment_remaining" value="{{ data[0]['payment_remaining'] }}" ></td>
+                <td>
+                    <button type="submit" name="update" value="{{ data[0]['employee_id'] }}">Submit Updates</button>
+                </td>
+            </form>
+        </tr>
     </table>
 ----------------------------------------
 
 ----------------------------------------
-<br>UPDATE lease SET<br>
-<form action="/update_lease" method="post">
-    <input type="radio", name="column1" value="customer_id" id="customer_id">
-    <label for="customer_id">Customer ID</label>
-    <br>
-    <input type="radio", name="column1" value="jet_id" id="jet_id">
-    <label for="jet_id">Jet ID</label>
-    <br>
-    <input type="radio", name="column1" value="lease_status" id="lease_status">
-    <label for="lease_status">Lease Status</label>
-    <br>
-    <input type="radio", name="column1" value="start_date" id="start_date">
-    <label for="start_date">Start Date</label>
-    <br>
-    <input type="radio", name="column1" value="end_date" id="end_date">
-    <label for="end_date">End Date</label>
-    <br>
-    <input type="radio", name="column1" value="duration" id="duration">
-    <label for="duration">Duration</label>
-    <br>
-    <input type="radio", name="column1" value="ground_staff_included" id="ground_staff_included">
-    <label for="ground_staff_included">Ground Staff Included</label>
-    <br>
-    <input type="radio", name="column1" value="lease_value" id="lease_value">
-    <label for="lease_value">Lease Value</label>
-    <br>
-    <input type="radio", name="column1" value="payment_to_date" id="payment_to_date">
-    <label for="payment_to_date">Payment To Date</label>
-    <br>
-    <input type="radio", name="column1" value="payment_remaining" id="payment_remaining">
-    <label for="payment_remaining">Payment Remaining</label>
-    <br>
-=
-<input type="text" name="value1"><br>
-WHERE
-<br>
-lease_id
-<br>
-=
-<input type="number" name="lease_id">
-<button type="submit">Submit Button</button>
-</form>
-
-
 </body>
 </html>

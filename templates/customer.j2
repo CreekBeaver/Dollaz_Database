@@ -10,11 +10,8 @@
         <ul>
             <li> View, Insert, and Delete Values from the Customer Table Below</li>
             <li> Click the "Update" Button to Update an Existing Row</li>
-            <li> Apply Filters to Change the View of the Table Below</li>
         </ul>
     </p>
-
-
      <table>
     <! -- This is what establishes the Table -->
     <thead>
@@ -60,26 +57,5 @@
     {% endfor %}
     </tbody>
     </table>
---------------------------------------
-    <p> Apply Filters Here</p>
-    <form action="'/customer" method="post">
-        <input type="checkbox" id="customer_id" value="customer_id">
-        <label for="customer_id">Customer ID</label>
-        <br>
-        <input type="checkbox" id="name" value="name">
-        <label for="name">Customer Name</label>
-        <br>
-        <input type="checkbox" id="contact_num" value="contact_num">
-        <label for="contact_num">Conatct Number</label>
-        <br>
-        <input type="checkbox" id="address" value="address">
-        <label for="address">Address</label>
-        <br>
-        <button type="submit" name="filter", value="filter">Apply Filter</button>
-
-
-
-    </form>
-
 </body>
 </html>

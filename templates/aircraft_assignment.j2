@@ -10,11 +10,8 @@
         <ul>
             <li> View, Insert, and Delete Values from the Aircraft Assignment Table Below</li>
             <li> Click the "Update" Button to Update an Existing Row</li>
-            <li> Apply Fliters to Change the View of the Table Below</li>
         </ul>
     </p>
-
-
      <table>
     <! -- This is what establishes the Table -->
     <thead>
@@ -25,7 +22,7 @@
         </tr>
         <form action="/aircraft_assignment" method="post">
             <tr>
-                {% for key in assignments[0].keys() %}
+                {% for key in data[0].keys() %}
                 <!-- Create a <th> tag with the key inside of it, this will be our header row -->
                 <th><input type="text" name="{{ key }}"></th>
                 <!-- End of this for loop -->
@@ -37,7 +34,7 @@
     <tbody>
 
     <!-- Now, iterate through every person in bsg_people -->
-    {% for person in assignmentss %}
+    {% for person in data %}
         <tr>
     <!-- Then iterate through every key in the current person dictionary -->
     {% for key in person.keys() %}
@@ -50,28 +47,14 @@
                 <button type="submit" name="delete", value="{{ person['lease_id'] }}">Delete</button>
                 </form>
             </td>
+            <td>
+                <form action="/update_aircraft_assignment" method="get">
+                <button type="submit" name="update" value="{{ person['lease_id'] }}">Update</button>
+                </form>
+            </td>
         </tr>
     {% endfor %}
     </tbody>
     </table>
---------------------------------------
-    <p> Apply Filters Here</p>
-    <form action="'/aircraft_assignment" method="post">
-        <input type="checkbox" id="lease_id" value="lease_id">
-        <label for="lease_id">Lease ID</label>
-        <br>
-        <input type="checkbox" id="employee_id" value="employee_id">
-        <label for="employee_id">Employee ID</label>
-        <button type="submit" name="filter", value="filter">Apply Filter</button>
-        <br>
-    </form>
-
-    -----------------------------------------
-    <form action="update_aircraft_assignment" method="get">
-        <button type="submit">Update Customer</button>
-
-    </form>
-
-
 </body>
 </html>

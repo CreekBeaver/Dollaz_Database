@@ -10,7 +10,6 @@
         <ul>
             <li> View, Insert, and Delete Values from the Lease Request Table Below</li>
             <li> Click the "Update" Button to Update an Existing Row</li>
-            <li> Apply Filters to Change the View of the Table Below</li>
         </ul>
     </p>
 
@@ -27,7 +26,7 @@
         </tr>
         <form action="/lease_request" method="post">
             <tr>
-                {% for key in lease_reqeusts[0].keys() %}
+                {% for key in data[0].keys() %}
                 <!-- Create a <th> tag with the key inside of it, this will be our header row -->
                 <th><input type="text" name="{{ key }}"></th>
                 <!-- End of this for loop -->
@@ -39,7 +38,7 @@
     <tbody>
 
     <!-- Now, iterate through every person in bsg_people -->
-    {% for person in lease_requests %}
+    {% for person in data %}
         <tr>
     <!-- Then iterate through every key in the current person dictionary -->
     {% for key in person.keys() %}
@@ -49,43 +48,17 @@
     {% endfor %}
             <td>
                 <form action="/lease_request" method="post">
-                <button type="submit" name="delete", value="{{ person['request_id'] }}">Delete</button>
+                <button type="submit" name="delete" value="{{ person['request_id'] }}">Delete</button>
+                </form>
+            </td>
+            <td>
+                <form action="/update_lease_request" method="get">
+                <button type="submit" name="update" value="{{ person['request_id'] }}">Update</button>
                 </form>
             </td>
         </tr>
     {% endfor %}
     </tbody>
     </table>
---------------------------------------
-    <p> Apply Filters Here</p>
-    <form action="'/lease" method="post">
-        <input type="checkbox" id="request_id" value="request_id">
-        <label for="request_id">Request ID</label>
-        <br>
-        <input type="checkbox" id="customer_id" value="customer_id">
-        <label for="customer_id">Customer ID</label>
-        <br>
-        <input type="checkbox" id="derivative_id" value="derivative_id">
-        <label for="derivative_id">Derivative ID</label>
-        <br>
-        <input type="checkbox" id="lease_status" value="lease_status">
-        <label for="lease_status">Lease Status</label>
-        <br>
-        <input type="checkbox" id="need_ground_staff" value="need_ground_staff">
-        <label for="need_ground_staff">Need Ground Staff</label>
-        <br>
-        <input type="checkbox" id="need_crew" value="need_crew">
-        <label for="need_crew">Need Crew</label>
-        <br>
-        <button type="submit" name="filter", value="filter">Apply Filter</button>
-
-    </form>
-
-    -----------------------------------------
-    <form action="/update_lease_request"  method="get">
-        <button type="submit">Update Lease Request</button>
-
-    </form>
-
 </body>
 </html>

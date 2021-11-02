@@ -8,11 +8,9 @@
     <h1>Welcome to the Update Lease Request Page</h1>
     <p>
         <ol>
-            <li> Select the Radio button associated with the Field you wish to change</li>
-            <li> Enter Into the Text Box the New Desired Value </li>
-            <li> Enter the Request ID which you would like to change </li>
-            <li> Click "Submit". If Changes are accepted, the Table will be Revised. </li>
-
+            <li>Update the information in the text Boxes</li>
+            <li>When you are pleased with the data, Click "Submit"</li>
+            <li>If the refresh page does not display your update, something went wrong</li>
         </ol>
     </p>
 
@@ -30,7 +28,7 @@
 
     <tbody>
     <!-- Now, iterate through every person in bsg_people -->
-    {% for person in lease_requests %}
+    {% for person in data %}
         <tr>
             <!-- Then iterate through every key in the current person dictionary -->
             {% for key in person.keys() %}
@@ -39,38 +37,22 @@
             {% endfor %}
         </tr>
     {% endfor %}
+        <tr>
+            <form action="/lease_request" method="post">
+                <td> </td>
+                <td><input type="text" name="customer_id" value="{{ data[0]['customer_id'] }}" ></td>
+                <td><input type="text" name="derivative_id" value="{{ data[0]['derivative_id'] }}" ></td>
+                <td><input type="text" name="need_ground_staff" value="{{ data[0]['need_ground_staff'] }}" ></td>
+                <td><input type="text" name="need_crew" value="{{ data[0]['need_crew'] }}"></td>
+                <td>
+                    <button type="submit" name="update" value="{{ data[0]['request_id'] }}">Submit Updates</button>
+                </td>
+            </form>
+        </tr>
     </table>
 ----------------------------------------
 
 ----------------------------------------
-<br>UPDATE lease SET<br>
-<form action="/update_lease_request" method="post">
-    <input type="radio", name="column1" value="request_id" id="request_id">
-    <label for="request_id">Request ID</label>
-    <br>
-    <input type="radio", name="column1" value="customer_id" id="customer_id">
-    <label for="customer_id">Customer ID</label>
-    <br>
-    <input type="radio", name="column1" value="derivative_id" id="derivative_id">
-    <label for="derivative_id">Derivative ID</label>
-    <br>
-    <input type="radio", name="column1" value="need_ground_staff" id="need_ground_staff">
-    <label for="need_ground_staff">Need Ground Staff</label>
-    <br>
-    <input type="radio", name="column1" value="need_crew" id="need_crew">
-    <label for="need_crew">Need Crew</label>
-    <br>
-=
-<input type="text" name="value1"><br>
-WHERE
-<br>
-request_id
-<br>
-=
-<input type="number" name="request_id">
-<button type="submit">Submit Button</button>
-</form>
-
 
 </body>
 </html>

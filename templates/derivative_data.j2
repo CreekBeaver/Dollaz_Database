@@ -8,9 +8,8 @@
     <h1>Welcome to the Derivative Data Page</h1>
     <p>
         <ul>
-            <li> View, Insert, and Delete Values from the Customer Table Below</li>
+            <li> View, Insert, and Delete Values from the Derivative Data Table Below</li>
             <li> Click the "Update" Button to Update an Existing Row</li>
-            <li> Apply Filters to Change the View of the Table Below</li>
         </ul>
     </p>
 
@@ -64,33 +63,5 @@
     {% endfor %}
     </tbody>
     </table>
---------------------------------------
-    <p> Apply Filters Here</p>
-    <form action="'/derivative_data" method="post">
-        <input type="checkbox" id="derivative_id" value="derivative_id">
-        <label for="derivative_id">Derivative ID</label>
-        <br>
-        <input type="checkbox" id="model_derivative" value="model_derivative">
-        <label for="model_derivative">Model Derivative</label>
-        <br>
-        <input type="checkbox" id="primary_use" value="primary_use">
-        <label for="primary_use">Primary Use</label>
-        <br>
-        <input type="checkbox" id="flight_range" value="flight_range">
-        <label for="flight_range">Flight Range</label>
-        <br>
-        <input type="checkbox" id="max_seating" value="max_seating">
-        <label for="max_seating">Max Seating</label>
-        <br>
-        <input type="checkbox" id="fuel_efficiency" value="fuel_efficiency">
-        <label for="fuel_efficiency">Fuel Efficiency</label>
-        <br>
-        <input type="checkbox" id="max_takeoff_weight" value="max_takeoff_weight">
-        <label for="max_takeoff_weight">Max Takeoff Weight</label>
-        <br>
-        <button type="submit" name="filter", value="filter">Apply Filter</button>
-    </form>
-
-    -----------------------------------------
 </body>
 </html>
