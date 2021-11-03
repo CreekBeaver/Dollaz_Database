@@ -178,6 +178,7 @@ def update_lease():
 		query = "SELECT * FROM lease WHERE lease_id = " + lease_id + ";"
 		cursor = db.execute_query(db_connection=db_connection, query=query)
 		results = cursor.fetchall()
+		print(results)
 		return render_template('update_lease.j2', data=results)
 
 
