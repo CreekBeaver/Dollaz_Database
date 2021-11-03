@@ -83,7 +83,7 @@ def employee():
 			query += 'employment_end_date=' + end_date + ','
 			query += 'title=' + title + ','
 			query += 'salary=' + salary
-			query += 'WHERE employee_id=' + employee_id + ';'
+			query += ' WHERE employee_id=' + employee_id + ';'
 			cursor = db.execute_query(db_connection=db_connection, query=query)
 
 		results = select_data('employee')
