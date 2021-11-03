@@ -207,7 +207,7 @@ def aircraft_assignment():
 		results = select_data('aircraft_assignment')
 		return render_template('aircraft_assignment.j2', data=results)
 	if request.method == "POST":
-		results = select_data('update_aircraft_assignment')
+		results = select_data('aircraft_assignment')
 		return render_template('aircraft_assignment.j2', data=results)
 
 
