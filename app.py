@@ -168,7 +168,7 @@ def lease():
 		return render_template('lease.j2', data=results)
 	if request.method == "POST":
 		results = select_data('lease')
-		return render_template('update_lease.j2', data=results)
+		return render_template('lease.j2', data=results)
 
 
 @app.route('/update_lease', methods=["GET", "POST"])
@@ -178,7 +178,7 @@ def update_lease():
 		query = "SELECT * FROM lease WHERE lease_id = " + lease_id + ";"
 		cursor = db.execute_query(db_connection=db_connection, query=query)
 		results = cursor.fetchall()
-		return render_template('lease.j2', data=results)
+		return render_template('update_lease.j2', data=results)
 
 
 @app.route('/lease_request', methods=["GET", "POST"])
@@ -188,7 +188,7 @@ def lease_request():
 		return render_template('lease_request.j2', data=results)
 	if request.method == "POST":
 		results = select_data('lease_request')
-		return render_template('update_lease_request.j2', data=results)
+		return render_template('lease_request.j2', data=results)
 
 
 @app.route('/update_lease_request', methods=["GET", "POST"])
@@ -198,7 +198,7 @@ def update_lease_request():
 		query = "SELECT * FROM lease_request WHERE request_id = " + request_id + ";"
 		cursor = db.execute_query(db_connection=db_connection, query=query)
 		results = cursor.fetchall()
-		return render_template('lease_request.j2', data=results)
+		return render_template('update_lease_request.j2', data=results)
 
 
 @app.route('/aircraft_assignment', methods=["GET", "POST"])
@@ -218,7 +218,7 @@ def update_aircraft_assignment():
 		query = "SELECT * FROM aircraft_assignment WHERE lease_id = " + lease_id + ";"
 		cursor = db.execute_query(db_connection=db_connection, query=query)
 		results = cursor.fetchall()
-		return render_template('aircraft_assignment.j2', data=results)
+		return render_template('update_aircraft_assignment.j2', data=results)
 
 
 # Listener
