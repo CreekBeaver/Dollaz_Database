@@ -168,7 +168,7 @@ def lease():
 		return render_template('lease.j2', data=results)
 	if request.method == "POST":
 		results = select_data('lease')
-		return render_template('lease.j2', data=results)
+		return render_template('update_lease.j2', data=results)
 
 
 @app.route('/update_lease', methods=["GET", "POST"])
@@ -188,7 +188,7 @@ def lease_request():
 		return render_template('lease_request.j2', data=results)
 	if request.method == "POST":
 		results = select_data('lease_request')
-		return render_template('lease_request.j2', data=results)
+		return render_template('update_lease_request.j2', data=results)
 
 
 @app.route('/update_lease_request', methods=["GET", "POST"])
@@ -207,7 +207,7 @@ def aircraft_assignment():
 		results = select_data('aircraft_assignment')
 		return render_template('aircraft_assignment.j2', data=results)
 	if request.method == "POST":
-		results = select_data('aircraft_assignment')
+		results = select_data('update_aircraft_assignment')
 		return render_template('aircraft_assignment.j2', data=results)
 
 
