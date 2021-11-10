@@ -9,6 +9,8 @@ app = Flask(__name__)
 db_connection = db.connect_to_database()
 
 
+
+
 def select_data(table_name):
 	"""
 	Performs a query for a given table to return all data.
