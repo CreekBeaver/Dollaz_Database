@@ -178,7 +178,7 @@ def table_update(table_name, request):
 
     elif table_name == 'lease':
         pass
-    
+
     elif table_name == 'lease_request':
         pass
 

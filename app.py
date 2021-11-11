@@ -8,6 +8,116 @@ app = Flask(__name__)
 # Database connection
 db_connection = db.connect_to_database()
 
+def table_insert(table_name, request):
+    """
+    Wrapper will perform the insert operations on an SQL Table
+    :param table_name: name of the table to insert values
+    :param request: Request as recieved by Flask App
+    :return: None Updates will occur in the Database
+    """
+	# tested and worked with good data
+    if table_name == 'customer':
+        # Insert Functionality
+        name = "'" + request.form['name'] + "'"
+        contact_num = "'" + request.form['contact_num'] + "'"
+        address = "'" + request.form['address'] + "'"
+
+
+        query = "INSERT into customer (name, contact_num, address)"
+        query += "VALUES (" + name + ',' + contact_num + ',' + address
+        query += ');'
+        cursor = db.execute_query(db_connection=db_connection, query=query)
+
+	# tested and worked with good data
+    elif table_name == 'employee':
+        # Insert Functionality
+        first_name = "'" + request.form['first_name'] + "'"
+        last_name = "'" + request.form['last_name'] + "'"
+        start_date = "'" + request.form['employment_start_date'] + "'"
+
+        # Need to handle the Null Entry
+        if request.form['employment_end_date'].lower() == 'null':
+            end_date = "NULL"
+        else:
+
+            end_date = "'" + request.form['employment_end_date'] + "'"
+        title = "'" + request.form['title'] + "'"
+        salary = request.form['salary']
+
+        query = "INSERT into employee (first_name, last_name, employment_start_date, employment_end_date, title, salary)"
+        query += "VALUES (" + first_name + ',' + last_name + ',' + start_date + ',' + end_date + ',' + title + ',' + salary
+        query += ');'
+        cursor = db.execute_query(db_connection=db_connection, query=query)
+	# tested and worked with good data
+    elif table_name == 'jet_data':
+        # Insert Functionality
+        derivative_id = request.form['derivative_id']
+        num_engine = request.form['num_engine']
+        flight_cycle = request.form['flight_cycle']
+        market_value = request.form['market_value']
+        payload = request.form['payload']
+
+        query = "INSERT into jet_data (derivative_id, num_engine, flight_cycle, market_value, payload)"
+        query += "VALUES (" + derivative_id + ',' + num_engine + ',' + flight_cycle + ',' + market_value + ',' + payload
+        query += ');'
+        cursor = db.execute_query(db_connection=db_connection, query=query)
+	# tested and worked with good data
+    elif table_name == 'lease':
+        customer_id = request.form['customer_id']
+        jet_id = request.form['jet_id']
+        lease_status = "'" + request.form['lease_status'] + "'"
+        start_date = "'" + request.form['start_date'] + "'"
+        end_date = "'" + request.form['end_date'] + "'"
+        duration = request.form['duration']
+        ground_staff_included = request.form['ground_staff_included']
+        crew_included = request.form['crew_included']
+        lease_value = request.form['lease_value']
+        payment_to_date = request.form['payment_to_date']
+        payment_remaining = request.form['payment_remaining']
+
+
+        query = "INSERT into lease (customer_id, jet_id, lease_status, start_date, end_date, duration, ground_staff_included, crew_included, lease_value, payment_to_date, payment_remaining)"
+        query += "VALUES (" + customer_id + ',' + jet_id + ',' + lease_status + ',' + start_date + ',' + end_date + ',' + duration + ',' + ground_staff_included + ',' + crew_included + ',' + lease_value + ',' + payment_to_date + ',' + payment_remaining
+        query += ');'
+        cursor = db.execute_query(db_connection=db_connection, query=query)
+	# tested and worked with good data
+    elif table_name == 'lease_request':
+        customer_id = request.form['customer_id']
+        derivative_id = request.form['derivative_id']
+        need_ground_staff = request.form['need_ground_staff']
+        need_crew = request.form['need_crew']
+
+        query = "INSERT into lease_request (customer_id, derivative_id, need_ground_staff, need_crew)"
+        query += "VALUES (" + customer_id + ',' + derivative_id + ',' + need_ground_staff + ',' + need_crew
+        query += ');'
+        cursor = db.execute_query(db_connection=db_connection, query=query)
+	# tested and worked with good data
+    elif table_name == 'aircraft_assignment':
+        lease_id = request.form['lease_id']
+        employee_id = request.form['employee_id']
+
+
+        query = "INSERT into aircraft_assignment (lease_id, employee_id)"
+        query += "VALUES (" + lease_id + ',' + employee_id
+        query += ');'
+        cursor = db.execute_query(db_connection=db_connection, query=query)
+
+	# tested and worked with good data
+    elif table_name == 'derivative_data':
+        # Insert Functionality
+        model_derivative = "'" + request.form['model_derivative'] + "'"
+        body_style = "'" + request.form['body_style'] + "'"
+        primary_use = "'" + request.form['primary_use'] + "'"
+        flight_range = request.form['flight_range']
+        max_seating = request.form['max_seating']
+        fuel_efficiency = request.form['fuel_efficiency']
+        max_takeoff_weight = request.form['max_takeoff_weight']
+
+
+        query = "INSERT into derivative_data (model_derivative, body_style, primary_use, flight_range, max_seating, fuel_efficiency, max_takeoff_weight)"
+        query += "VALUES (" + model_derivative + ',' + body_style + ',' + primary_use + ',' + flight_range + ',' + max_seating + ',' + fuel_efficiency + ',' + max_takeoff_weight
+        query += ');'
+        cursor = db.execute_query(db_connection=db_connection, query=query)
 
 
 
@@ -38,23 +148,24 @@ def employee():
 
 		# Insert Functionality
 		if 'add_row' in request.form.keys():
-			first_name = "'" + request.form['first_name'] + "'"
-			last_name = "'" + request.form['last_name'] + "'"
-			start_date = "'" + request.form['employment_start_date'] + "'"
+			table_insert('employee', request)
+			#first_name = "'" + request.form['first_name'] + "'"
+			#last_name = "'" + request.form['last_name'] + "'"
+			#start_date = "'" + request.form['employment_start_date'] + "'"
 
 			# Need to handle the Null Entry
-			if request.form['employment_end_date'].lower() == 'null':
-				end_date = "NULL"
-			else:
+			#if request.form['employment_end_date'].lower() == 'null':
+		#		end_date = "NULL"
+			#else:
 
-				end_date = "'" + request.form['employment_end_date'] + "'"
-			title = "'" + request.form['title'] + "'"
-			salary = request.form['salary']
+			#	end_date = "'" + request.form['employment_end_date'] + "'"
+			#title = "'" + request.form['title'] + "'"
+			#salary = request.form['salary']
 
-			query = "INSERT into employee (first_name, last_name, employment_start_date, employment_end_date, title, salary)"
-			query += "VALUES (" + first_name + ',' + last_name + ',' + start_date + ',' + end_date + ',' + title + ',' + salary
-			query += ');'
-			cursor = db.execute_query(db_connection=db_connection, query=query)
+			#query = "INSERT into employee (first_name, last_name, employment_start_date, employment_end_date, title, salary)"
+			#query += "VALUES (" + first_name + ',' + last_name + ',' + start_date + ',' + end_date + ',' + title + ',' + salary
+			#query += ');'
+			#cursor = db.execute_query(db_connection=db_connection, query=query)
 
 		# Delete Functionality
 		if 'delete' in request.form.keys():
@@ -109,6 +220,8 @@ def customers():
 		results = select_data('customer')
 		return render_template('customer.j2', customers=results)
 	if request.method == "POST":
+		if 'add_row' in request.form.keys():
+			table_insert('customer', request)
 		results = select_data('customer')
 		return render_template("customer.j2", customers=results)
 
@@ -129,6 +242,8 @@ def jet_data():
 		results = select_data('jet_data')
 		return render_template('jet_data.j2', jets=results)
 	if request.method == "POST":
+		if 'add_row' in request.form.keys():
+			table_insert('jet_data', request)
 		results = select_data('jet_data')
 		return render_template('jet_data.j2', jets=results)
 
@@ -149,6 +264,8 @@ def derivative_data():
 		results = select_data('derivative_data')
 		return render_template('derivative_data.j2', data=results)
 	if request.method =="POST":
+		if 'add_row' in request.form.keys():
+			table_insert('derivative_data', request)
 		results = select_data('derivative_data')
 		return render_template('derivative_data.j2', data=results)
 
@@ -169,6 +286,8 @@ def lease():
 		results = select_data('lease')
 		return render_template('lease.j2', data=results)
 	if request.method == "POST":
+		if 'add_row' in request.form.keys():
+			table_insert('lease', request)
 		results = select_data('lease')
 		return render_template('lease.j2', data=results)
 
@@ -190,6 +309,8 @@ def lease_request():
 		results = select_data('lease_request')
 		return render_template('lease_request.j2', data=results)
 	if request.method == "POST":
+		if 'add_row' in request.form.keys():
+			table_insert('lease_request', request)
 		results = select_data('lease_request')
 		return render_template('lease_request.j2', data=results)
 
@@ -210,6 +331,8 @@ def aircraft_assignment():
 		results = select_data('aircraft_assignment')
 		return render_template('aircraft_assignment.j2', data=results)
 	if request.method == "POST":
+		if 'add_row' in request.form.keys():
+			table_insert('aircraft_assignment', request)
 		results = select_data('aircraft_assignment')
 		return render_template('aircraft_assignment.j2', data=results)
 
