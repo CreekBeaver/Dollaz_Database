@@ -94,11 +94,11 @@
 
     </p>
     <p> Apply Filters Here</p>
-    <p> Dropdown Filter - By Employee Full Name </p>
-    <form action="/filter" method="POST">
+    <p> Dropdown Filter - By Employee Last Name </p>
+    <form action="/filter_employee" method="POST">
         <SELECT class="form" name="employee_filter" id="employee_filter">
         {% for e in data %}
-            <OPTION value={{e["employee_id"]}}>{{e["first_name"]}} {{e["last_name"]}}</OPTION>
+            <OPTION value={{e["employee_id"]}}>{{e["last_name"]}}</OPTION>
         {% endfor %}
         </SELECT>
         <br>

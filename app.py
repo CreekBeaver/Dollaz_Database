@@ -362,6 +362,17 @@ def update_aircraft_assignment():
 		results = cursor.fetchall()
 		return render_template('update_aircraft_assignment.j2', data=results)
 
+# Filter employees by last name
+@app.route("/filter_employee", methods =["GET", "POST"])
+def filter_employees():
+	db_connection = db.connect_to_database()
+	if request.method == "POST":
+		employee_id = request.form['employee_filter']
+		query = "SELECT * FROM employee WHERE employee_id = " + employee_id + ";"
+		# Filter employees by last name
+		cursor = db.execute_query(db_connection=db_connection, query=query)
+		results = cursor.fetchall()
+		return render_template('employee.j2', data=results)
 
 # Listener
 if __name__ == "__main__":
