@@ -15,6 +15,7 @@ def table_insert(table_name, request):
     :param request: Request as recieved by Flask App
     :return: None Updates will occur in the Database
     """
+    db_connection = db.connect_to_database()
 	# tested and worked with good data
     if table_name == 'customer':
         # Insert Functionality
@@ -127,6 +128,7 @@ def select_data(table_name):
 	:param table_name: String, Consisting of a table name
 	:return: Query from an SQL Tble.
 	"""
+	db_connection = db.connect_to_database()
 	query = "SELECT * FROM " + table_name + ";"
 	cursor = db.execute_query(db_connection=db_connection, query=query)
 	results = cursor.fetchall()
@@ -135,12 +137,13 @@ def select_data(table_name):
 # --- Routes ---
 @app.route('/')
 def root():
+	db_connection = db.connect_to_database()
 	return render_template("index.j2")
 
 
 @app.route('/employee', methods=['GET', 'POST'])
 def employee():
-
+	db_connection = db.connect_to_database()
 	if request.method == "GET":
 		results = select_data('employee')
 		return render_template('employee.j2', data=results)
@@ -205,6 +208,7 @@ def employee():
 
 @app.route('/update_employee', methods=['GET','POST'])
 def update_employee():
+	db_connection = db.connect_to_database()
 	# Obtain the Update Employee Page
 	if request.method == "GET":
 		employee_id = request.args['update']
@@ -216,6 +220,7 @@ def update_employee():
 
 @app.route('/customer', methods=['GET', 'POST'])
 def customers():
+	db_connection = db.connect_to_database()
 	if request.method == "GET":
 		results = select_data('customer')
 		return render_template('customer.j2', customers=results)
@@ -228,6 +233,7 @@ def customers():
 
 @app.route('/update_customer', methods=['GET','POST'])
 def update_customer():
+	db_connection = db.connect_to_database()
 	if request.method == "GET":
 		customer_id = request.args['update']
 		query = "SELECT * FROM customer WHERE customer_id = " + customer_id + ";"
@@ -238,6 +244,7 @@ def update_customer():
 
 @app.route('/jet_data', methods=["GET", "POST"])
 def jet_data():
+	db_connection = db.connect_to_database()
 	if request.method == "GET":
 		results = select_data('jet_data')
 		return render_template('jet_data.j2', jets=results)
@@ -250,6 +257,7 @@ def jet_data():
 
 @app.route('/update_jet_data', methods=["GET", "POST"])
 def update_jet_data():
+	db_connection = db.connect_to_database()
 	if request.method == "GET":
 		jet_id = request.args['update']
 		query = "SELECT * FROM jet_data WHERE jet_id = " + jet_id + ";"
@@ -260,6 +268,7 @@ def update_jet_data():
 
 @app.route('/derivative_data', methods=["GET", "POST"])
 def derivative_data():
+	db_connection = db.connect_to_database()
 	if request.method == "GET":
 		results = select_data('derivative_data')
 		return render_template('derivative_data.j2', data=results)
@@ -272,6 +281,7 @@ def derivative_data():
 
 @app.route('/update_derivative_data')
 def update_derivative_data():
+	db_connection = db.connect_to_database()
 	if request.method == "GET":
 		derivative_id = request.args['update']
 		query = "SELECT * FROM derivative_data WHERE derivative_id = " + derivative_id + ";"
@@ -282,6 +292,7 @@ def update_derivative_data():
 
 @app.route('/lease', methods=["GET", "POST"])
 def lease():
+	db_connection = db.connect_to_database()
 	if request.method == "GET":
 		results = select_data('lease')
 		return render_template('lease.j2', data=results)
@@ -294,6 +305,7 @@ def lease():
 
 @app.route('/update_lease', methods=["GET", "POST"])
 def update_lease():
+	db_connection = db.connect_to_database()
 	if request.method == "GET":
 		lease_id = request.args['update']
 		query = "SELECT * FROM lease WHERE lease_id = " + lease_id + ";"
@@ -305,6 +317,7 @@ def update_lease():
 
 @app.route('/lease_request', methods=["GET", "POST"])
 def lease_request():
+	db_connection = db.connect_to_database()
 	if request.method == "GET":
 		results = select_data('lease_request')
 		return render_template('lease_request.j2', data=results)
@@ -317,6 +330,7 @@ def lease_request():
 
 @app.route('/update_lease_request', methods=["GET", "POST"])
 def update_lease_request():
+	db_connection = db.connect_to_database()
 	if request.method == "GET":
 		request_id = request.args['update']
 		query = "SELECT * FROM lease_request WHERE request_id = " + request_id + ";"
@@ -327,6 +341,7 @@ def update_lease_request():
 
 @app.route('/aircraft_assignment', methods=["GET", "POST"])
 def aircraft_assignment():
+	db_connection = db.connect_to_database()
 	if request.method == "GET":
 		results = select_data('aircraft_assignment')
 		return render_template('aircraft_assignment.j2', data=results)
@@ -339,6 +354,7 @@ def aircraft_assignment():
 
 @app.route('/update_aircraft_assignment', methods=["GET", "POST"])
 def update_aircraft_assignment():
+	db_connection = db.connect_to_database()
 	if request.method == "GET":
 		lease_id = request.args['update']
 		query = "SELECT * FROM aircraft_assignment WHERE lease_id = " + lease_id + ";"
@@ -349,5 +365,6 @@ def update_aircraft_assignment():
 
 # Listener
 if __name__ == "__main__":
-	port = int(os.environ.get("PORT", 9112))
+	port = int(os.environ.get('PORT', 4520))
 	app.run(port=port, debug=True)
+	#app.run(host="flip1.engr.oregonstate.edu", port=4518, debug=True)
