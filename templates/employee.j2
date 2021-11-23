@@ -94,6 +94,20 @@
 
     </p>
     <p> Apply Filters Here</p>
+    <p> Dropdown Filter - By Employee Last Name </p>
+    <form action="/filter_employee" method="POST">
+        <SELECT class="form" name="employee_filter" id="employee_filter">
+        {% for e in data %}
+            <OPTION value={{e["employee_id"]}}>{{e["last_name"]}}</OPTION>
+        {% endfor %}
+        </SELECT>
+        <br>
+        <button type="submit" name="filter", value="filter">Apply Filter</button>
+    </form>
+    <br>
+    <br>
+
+    <p> Checkbox Filter </p>
     <form action="'/employee" method="post">
         <input type="checkbox" id="employee_id" value="employee_id">
         <label for="employee_id">Employee ID</label>

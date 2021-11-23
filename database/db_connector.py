@@ -13,14 +13,15 @@ load_dotenv(find_dotenv())
 
 # THis is simply for testing purposes
 host = 'classmysql.engr.oregonstate.edu'      # MUST BE THIS
-user = 'cs340_creekk'       # don't forget the CS_340 prefix
-passwd = '4515'               # should only be 4 digits if default
-db = 'cs340_creekk'
+user = 'cs340_delapenc'       # don't forget the CS_340 prefix
+passwd = '4517'               # should only be 4 digits if default
+db = 'cs340_delapenc'
 
 def connect_to_database(host = host, user = user, passwd = passwd, db = db):
     '''
     connects to a database and returns a database objects
     '''
+    # swapped pymysql with MySqldb
     db_connection = MySQLdb.connect(host,user,passwd,db)
     return db_connection
 
