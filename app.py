@@ -444,7 +444,7 @@ def lease():
 		results = select_data('lease')
 		if 'update' in request.form.keys():
 			table_update('lease', request)
-		results = select_data('derivative_data')
+		results = select_data('lease')
 		return render_template('lease.j2', data=results)
 
 
