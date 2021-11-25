@@ -15,6 +15,7 @@ def table_insert(table_name, request):
     :param request: Request as recieved by Flask App
     :return: None Updates will occur in the Database
     """
+    db_connection = db.connect_to_database()
 	# tested and worked with good data
     if table_name == 'customer':
         # Insert Functionality
@@ -119,7 +120,48 @@ def table_insert(table_name, request):
         query += ');'
         cursor = db.execute_query(db_connection=db_connection, query=query)
 
+def table_delete(table_name, request):
+    """
+    Deletes a row in a table given the table name and Flask Requeest
+    :param table_name: string containing target table for row delete
+    :param request: Request as recieved from Webpage
+    :return: None: Deletes the row in the table
+    """
+    if table_name == 'customer':
+        query = "DELETE FROM customer WHERE customer_id="
+        query += request.form['delete'] + ';'
+        cursor = db.execute_query(db_connection=db_connection, query=query)
 
+    elif table_name == 'employee':
+        query = "DELETE FROM employee WHERE employee_id="
+        query += request.form['delete'] + ';'
+        cursor = db.execute_query(db_connection=db_connection, query=query)
+
+    elif table_name == 'jet_data':
+        query = "DELETE FROM jet_data WHERE jet_id="
+        query += request.form['delete'] + ';'
+        cursor = db.execute_query(db_connection=db_connection, query=query)
+
+    elif table_name == 'lease':
+        query = "DELETE FROM lease WHERE lease_id="
+        query += request.form['delete'] + ';'
+        cursor = db.execute_query(db_connection=db_connection, query=query)
+
+    elif table_name == 'lease_request':
+        query = "DELETE FROM lease_request WHERE request_id="
+        query += request.form['delete'] + ';'
+        cursor = db.execute_query(db_connection=db_connection, query=query)
+
+    elif table_name == 'aircraft_assignment':
+        query = "DELETE FROM aircraft_assignment WHERE lease_id="
+        # Note; Might also need to delete the matching entity! That will require form change
+        query += request.form['delete'] + ';'
+        cursor = db.execute_query(db_connection=db_connection, query=query)
+
+    elif table_name == 'derivative_data':
+        query = "DELETE FROM derivative_data WHERE derivative_id="
+        query += request.form['delete'] + ';'
+        cursor = db.execute_query(db_connection=db_connection, query=query)
 
 def select_data(table_name):
 	"""
@@ -127,6 +169,7 @@ def select_data(table_name):
 	:param table_name: String, Consisting of a table name
 	:return: Query from an SQL Tble.
 	"""
+	db_connection = db.connect_to_database()
 	query = "SELECT * FROM " + table_name + ";"
 	cursor = db.execute_query(db_connection=db_connection, query=query)
 	results = cursor.fetchall()
@@ -135,12 +178,13 @@ def select_data(table_name):
 # --- Routes ---
 @app.route('/')
 def root():
+	db_connection = db.connect_to_database()
 	return render_template("index.j2")
 
 
 @app.route('/employee', methods=['GET', 'POST'])
 def employee():
-
+	db_connection = db.connect_to_database()
 	if request.method == "GET":
 		results = select_data('employee')
 		return render_template('employee.j2', data=results)
@@ -149,29 +193,11 @@ def employee():
 		# Insert Functionality
 		if 'add_row' in request.form.keys():
 			table_insert('employee', request)
-			#first_name = "'" + request.form['first_name'] + "'"
-			#last_name = "'" + request.form['last_name'] + "'"
-			#start_date = "'" + request.form['employment_start_date'] + "'"
 
-			# Need to handle the Null Entry
-			#if request.form['employment_end_date'].lower() == 'null':
-		#		end_date = "NULL"
-			#else:
-
-			#	end_date = "'" + request.form['employment_end_date'] + "'"
-			#title = "'" + request.form['title'] + "'"
-			#salary = request.form['salary']
-
-			#query = "INSERT into employee (first_name, last_name, employment_start_date, employment_end_date, title, salary)"
-			#query += "VALUES (" + first_name + ',' + last_name + ',' + start_date + ',' + end_date + ',' + title + ',' + salary
-			#query += ');'
-			#cursor = db.execute_query(db_connection=db_connection, query=query)
 
 		# Delete Functionality
 		if 'delete' in request.form.keys():
-			query = "DELETE FROM employee WHERE employee_id="
-			query += request.form['delete'] + ';'
-			cursor = db.execute_query(db_connection=db_connection, query=query)
+			table_delete('employee', request)
 
 
 		# Update Functionality
@@ -205,6 +231,7 @@ def employee():
 
 @app.route('/update_employee', methods=['GET','POST'])
 def update_employee():
+	db_connection = db.connect_to_database()
 	# Obtain the Update Employee Page
 	if request.method == "GET":
 		employee_id = request.args['update']
@@ -216,18 +243,22 @@ def update_employee():
 
 @app.route('/customer', methods=['GET', 'POST'])
 def customers():
+	db_connection = db.connect_to_database()
 	if request.method == "GET":
 		results = select_data('customer')
 		return render_template('customer.j2', customers=results)
 	if request.method == "POST":
 		if 'add_row' in request.form.keys():
 			table_insert('customer', request)
+		if 'delete' in request.form.keys():
+			table_delete('customer', request)
 		results = select_data('customer')
 		return render_template("customer.j2", customers=results)
 
 
 @app.route('/update_customer', methods=['GET','POST'])
 def update_customer():
+	db_connection = db.connect_to_database()
 	if request.method == "GET":
 		customer_id = request.args['update']
 		query = "SELECT * FROM customer WHERE customer_id = " + customer_id + ";"
@@ -238,18 +269,22 @@ def update_customer():
 
 @app.route('/jet_data', methods=["GET", "POST"])
 def jet_data():
+	db_connection = db.connect_to_database()
 	if request.method == "GET":
 		results = select_data('jet_data')
 		return render_template('jet_data.j2', jets=results)
 	if request.method == "POST":
 		if 'add_row' in request.form.keys():
 			table_insert('jet_data', request)
+		if 'delete' in request.form.keys():
+			table_delete('jet_data', request)
 		results = select_data('jet_data')
 		return render_template('jet_data.j2', jets=results)
 
 
 @app.route('/update_jet_data', methods=["GET", "POST"])
 def update_jet_data():
+	db_connection = db.connect_to_database()
 	if request.method == "GET":
 		jet_id = request.args['update']
 		query = "SELECT * FROM jet_data WHERE jet_id = " + jet_id + ";"
@@ -260,18 +295,22 @@ def update_jet_data():
 
 @app.route('/derivative_data', methods=["GET", "POST"])
 def derivative_data():
+	db_connection = db.connect_to_database()
 	if request.method == "GET":
 		results = select_data('derivative_data')
 		return render_template('derivative_data.j2', data=results)
 	if request.method =="POST":
 		if 'add_row' in request.form.keys():
 			table_insert('derivative_data', request)
+		if 'delete' in request.form.keys():
+			table_delete('derivative_data', request)
 		results = select_data('derivative_data')
 		return render_template('derivative_data.j2', data=results)
 
 
 @app.route('/update_derivative_data')
 def update_derivative_data():
+	db_connection = db.connect_to_database()
 	if request.method == "GET":
 		derivative_id = request.args['update']
 		query = "SELECT * FROM derivative_data WHERE derivative_id = " + derivative_id + ";"
@@ -282,18 +321,22 @@ def update_derivative_data():
 
 @app.route('/lease', methods=["GET", "POST"])
 def lease():
+	db_connection = db.connect_to_database()
 	if request.method == "GET":
 		results = select_data('lease')
 		return render_template('lease.j2', data=results)
 	if request.method == "POST":
 		if 'add_row' in request.form.keys():
 			table_insert('lease', request)
+		if 'delete' in request.form.keys():
+			table_delete('lease', request)
 		results = select_data('lease')
 		return render_template('lease.j2', data=results)
 
 
 @app.route('/update_lease', methods=["GET", "POST"])
 def update_lease():
+	db_connection = db.connect_to_database()
 	if request.method == "GET":
 		lease_id = request.args['update']
 		query = "SELECT * FROM lease WHERE lease_id = " + lease_id + ";"
@@ -305,18 +348,22 @@ def update_lease():
 
 @app.route('/lease_request', methods=["GET", "POST"])
 def lease_request():
+	db_connection = db.connect_to_database()
 	if request.method == "GET":
 		results = select_data('lease_request')
 		return render_template('lease_request.j2', data=results)
 	if request.method == "POST":
 		if 'add_row' in request.form.keys():
 			table_insert('lease_request', request)
+		if 'delete' in request.form.keys():
+			table_delete('lease_request', request)
 		results = select_data('lease_request')
 		return render_template('lease_request.j2', data=results)
 
 
 @app.route('/update_lease_request', methods=["GET", "POST"])
 def update_lease_request():
+	db_connection = db.connect_to_database()
 	if request.method == "GET":
 		request_id = request.args['update']
 		query = "SELECT * FROM lease_request WHERE request_id = " + request_id + ";"
@@ -327,18 +374,22 @@ def update_lease_request():
 
 @app.route('/aircraft_assignment', methods=["GET", "POST"])
 def aircraft_assignment():
+	db_connection = db.connect_to_database()
 	if request.method == "GET":
 		results = select_data('aircraft_assignment')
 		return render_template('aircraft_assignment.j2', data=results)
 	if request.method == "POST":
 		if 'add_row' in request.form.keys():
 			table_insert('aircraft_assignment', request)
+		if 'delete' in request.form.keys():
+			table_delete('aircraft_assignment', request)
 		results = select_data('aircraft_assignment')
 		return render_template('aircraft_assignment.j2', data=results)
 
 
 @app.route('/update_aircraft_assignment', methods=["GET", "POST"])
 def update_aircraft_assignment():
+	db_connection = db.connect_to_database()
 	if request.method == "GET":
 		lease_id = request.args['update']
 		query = "SELECT * FROM aircraft_assignment WHERE lease_id = " + lease_id + ";"
@@ -346,8 +397,20 @@ def update_aircraft_assignment():
 		results = cursor.fetchall()
 		return render_template('update_aircraft_assignment.j2', data=results)
 
+# Filter employees by last name
+@app.route("/filter_employee", methods =["GET", "POST"])
+def filter_employees():
+	db_connection = db.connect_to_database()
+	if request.method == "POST":
+		employee_id = request.form['employee_filter']
+		query = "SELECT * FROM employee WHERE employee_id = " + employee_id + ";"
+		# Filter employees by last name
+		cursor = db.execute_query(db_connection=db_connection, query=query)
+		results = cursor.fetchall()
+		return render_template('employee.j2', data=results)
 
 # Listener
 if __name__ == "__main__":
-	port = int(os.environ.get("PORT", 9112))
+	port = int(os.environ.get('PORT', 4520))
 	app.run(port=port, debug=True)
+	#app.run(host="flip1.engr.oregonstate.edu", port=4518, debug=True)

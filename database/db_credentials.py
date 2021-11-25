@@ -10,6 +10,12 @@
 #passwd = 'password'                        # set accordingly
 #db = 'test_jet'
 
+'''
+host = 'classmysql.engr.oregonstate.edu'      # MUST BE THIS
+user = 'cs340_delapenc'       # don't forget the CS_340 prefix
+passwd = '4517'               # should only be 4 digits if default
+db = 'cs340_delapenc'
+'''
 
 # For OSU Flip Servers
 

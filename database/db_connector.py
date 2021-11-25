@@ -11,6 +11,15 @@ load_dotenv(find_dotenv())
 #passwd = os.environ.get("340DBPW")
 #db = os.environ.get("340DB")
 
+
+'''
+# THis is simply for testing purposes
+host = 'classmysql.engr.oregonstate.edu'      # MUST BE THIS
+user = 'cs340_delapenc'       # don't forget the CS_340 prefix
+passwd = '4517'               # should only be 4 digits if default
+db = 'cs340_delapenc'
+'''
+
 # THis is simply for testing purposes
 host = 'classmysql.engr.oregonstate.edu'      # MUST BE THIS
 user = 'cs340_creekk'       # don't forget the CS_340 prefix
