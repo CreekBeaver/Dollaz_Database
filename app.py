@@ -178,7 +178,6 @@ def select_data(table_name):
 def table_update(table_name, request):
 
     if table_name == 'customer':
-        print('here here here here')
         customer_id = request.form['update']
         name = "'" + request.form['name'] + "'"
         contact_num = "'" + request.form['contact_num'] + "'"
@@ -188,6 +187,10 @@ def table_update(table_name, request):
         query += 'contact_num=' + contact_num + ","
         query += 'address=' + address
         query += ' WHERE customer_id=' + customer_id + ';'
+
+		print(query)
+
+
         cursor = db.execute_query(db_connection=db_connection, query=query)
 
     elif table_name == 'employee':
