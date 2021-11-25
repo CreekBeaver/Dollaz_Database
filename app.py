@@ -176,6 +176,7 @@ def select_data(table_name):
 	return results
 
 def table_update(table_name, request):
+
     if table_name == 'customer':
         customer_id = request.form['update']
         name = "'" + request.form['name'] + "'"
@@ -359,6 +360,7 @@ def customers():
 		if 'delete' in request.form.keys():
 			table_delete('customer', request)
 		if 'update' in request.form.keys():
+			print('sending update')
 			table_update('customer', request)
 		results = select_data('customer')
 		return render_template("customer.j2", customers=results)
