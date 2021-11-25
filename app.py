@@ -182,7 +182,7 @@ def table_update(table_name, request):
         contact_num = "'" + request.form['contact_num'] + "'"
         address = "'" + request.form['address'] + "'"
 
-        query = "UPDATE employee SET name=" + name + ","
+        query = "UPDATE customer SET name=" + name + ","
         query += 'contact_num=' + contact_num + ","
         query += 'address=' + address
         query += ' WHERE customer_id=' + customer_id + ';'
@@ -292,7 +292,7 @@ def table_update(table_name, request):
         fuel_efficiency = request.form['fuel_efficiency']
         max_takeoff_weight = request.form['max_takeoff_weight']
 
-        query = "UPDATE darivative_data SET model_derivative=" + model_derivative + ","
+        query = "UPDATE derivative_data SET model_derivative=" + model_derivative + ","
         query += 'body_style=' + body_style + ","
         query += 'primary_use=' + primary_use + ','
         query += 'flight_range=' + flight_range + ','
@@ -445,6 +445,7 @@ def lease():
 		results = select_data('lease')
 		if 'update' in request.form.keys():
 			table_update('lease', request)
+		results = select_data('derivative_data')
 		return render_template('lease.j2', data=results)
 
 
@@ -456,7 +457,6 @@ def update_lease():
 		query = "SELECT * FROM lease WHERE lease_id = " + lease_id + ";"
 		cursor = db.execute_query(db_connection=db_connection, query=query)
 		results = cursor.fetchall()
-		print(results)
 		return render_template('update_lease.j2', data=results)
 
 
