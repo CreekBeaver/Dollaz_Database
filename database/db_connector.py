@@ -22,9 +22,9 @@ db = 'cs340_delapenc'
 
 # THis is simply for testing purposes
 host = 'classmysql.engr.oregonstate.edu'      # MUST BE THIS
-user = 'cs340_delapenc'       # don't forget the CS_340 prefix
-passwd = '4517'               # should only be 4 digits if default
-db = 'cs340_delapenc'
+user = 'cs340_creekk'       # don't forget the CS_340 prefix
+passwd = '4515'              # should only be 4 digits if default
+db = 'cs340_creekk'
 
 def connect_to_database(host = host, user = user, passwd = passwd, db = db):
     '''
