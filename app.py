@@ -176,7 +176,6 @@ def select_data(table_name):
 	return results
 
 def table_update(table_name, request):
-
     if table_name == 'customer':
         customer_id = request.form['update']
         name = "'" + request.form['name'] + "'"
@@ -187,10 +186,6 @@ def table_update(table_name, request):
         query += 'contact_num=' + contact_num + ","
         query += 'address=' + address
         query += ' WHERE customer_id=' + customer_id + ';'
-
-		print(query)
-
-
         cursor = db.execute_query(db_connection=db_connection, query=query)
 
     elif table_name == 'employee':
@@ -201,14 +196,13 @@ def table_update(table_name, request):
 
         # Need to handle the Null Entry
         if request.form['employment_end_date'].lower() == 'none' or request.form[
-            'employment_end_date'].lower() == 'null':
+        'employment_end_date'].lower() == 'null':
             end_date = "NULL"
         else:
-
             end_date = "'" + request.form['employment_end_date'] + "'"
+
         title = "'" + request.form['title'] + "'"
         salary = request.form['salary']
-
         query = "UPDATE employee SET first_name=" + first_name + ","
         query += 'last_name=' + last_name + ","
         query += 'employment_start_date=' + start_date + ','
