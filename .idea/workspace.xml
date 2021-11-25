@@ -6,6 +6,10 @@
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/db_connector.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/db_connector.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/db_credentials.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/db_credentials.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_ddq.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/db_ddq.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_dmq.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/db_dmq.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drop_tables.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/drop_tables.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scratch.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/scratch.sql" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -156,6 +160,9 @@
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Kyle Creek\Desktop\OSU\Fall_2021\CS340\Project\dollaz_database\database" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Kyle Creek\Desktop\OSU\Fall_2021\CS340\Project\dollaz_database" />
     </key>
@@ -215,7 +222,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="974" height="1047" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26602563" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
