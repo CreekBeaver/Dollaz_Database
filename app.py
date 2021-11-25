@@ -175,6 +175,59 @@ def select_data(table_name):
 	results = cursor.fetchall()
 	return results
 
+def table_update(table_name, request):
+    if table_name == 'customer':
+        customer_id = request.form['update']
+        name = "'" + request.form['name'] + "'"
+        contact_num = "'" + request.form['contact_num'] + "'"
+        address = "'" + request.form['address'] + "'"
+
+        query = "UPDATE employee SET name=" + name + ","
+        query += 'contact_num=' + contact_num + ","
+        query += 'address=' + address
+        query += ' WHERE customer_id=' + customer_id + ';'
+        cursor = db.execute_query(db_connection=db_connection, query=query)
+
+    elif table_name == 'employee':
+        employee_id = request.form['update']
+        first_name = "'" + request.form['first_name'] + "'"
+        last_name = "'" + request.form['last_name'] + "'"
+        start_date = "'" + request.form['employment_start_date'] + "'"
+
+        # Need to handle the Null Entry
+        if request.form['employment_end_date'].lower() == 'none' or request.form[
+            'employment_end_date'].lower() == 'null':
+            end_date = "NULL"
+        else:
+
+            end_date = "'" + request.form['employment_end_date'] + "'"
+        title = "'" + request.form['title'] + "'"
+        salary = request.form['salary']
+
+        query = "UPDATE employee SET first_name=" + first_name + ","
+        query += 'last_name=' + last_name + ","
+        query += 'employment_start_date=' + start_date + ','
+        query += 'employment_end_date=' + end_date + ','
+        query += 'title=' + title + ','
+        query += 'salary=' + salary
+        query += ' WHERE employee_id=' + employee_id + ';'
+        cursor = db.execute_query(db_connection=db_connection, query=query)
+
+    elif table_name == 'jet_data':
+        pass
+
+    elif table_name == 'lease':
+        pass
+
+    elif table_name == 'lease_request':
+        pass
+
+    elif table_name == 'aircraft_assignment':
+        pass
+
+    elif table_name == 'derivative_data':
+        pass
+
 # --- Routes ---
 @app.route('/')
 def root():
@@ -202,28 +255,7 @@ def employee():
 
 		# Update Functionality
 		if 'update' in request.form.keys():
-			employee_id = request.form['update']
-			first_name = "'" + request.form['first_name'] + "'"
-			last_name = "'" + request.form['last_name'] + "'"
-			start_date = "'" + request.form['employment_start_date'] + "'"
-
-			# Need to handle the Null Entry
-			if request.form['employment_end_date'].lower() == 'none' or request.form['employment_end_date'].lower() == 'null':
-				end_date = "NULL"
-			else:
-
-				end_date = "'" + request.form['employment_end_date'] + "'"
-			title = "'" + request.form['title'] + "'"
-			salary = request.form['salary']
-
-			query = "UPDATE employee SET first_name=" + first_name +","
-			query += 'last_name=' + last_name + ","
-			query += 'employment_start_date=' + start_date + ','
-			query += 'employment_end_date=' + end_date + ','
-			query += 'title=' + title + ','
-			query += 'salary=' + salary
-			query += ' WHERE employee_id=' + employee_id + ';'
-			cursor = db.execute_query(db_connection=db_connection, query=query)
+			table_update('employee', request)
 
 		results = select_data('employee')
 		return render_template('employee.j2', data=results)
