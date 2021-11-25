@@ -214,19 +214,93 @@ def table_update(table_name, request):
         cursor = db.execute_query(db_connection=db_connection, query=query)
 
     elif table_name == 'jet_data':
-        pass
+        jet_id = request.form['update']
+        derivative_id = request.form['derivative_id']
+        num_engine = request.form['num_engine']
+        flight_cycle = request.form['flight_cycle']
+        market_value = request.form['market_value']
+        payload = request.form['payload']
+
+        query = "UPDATE jet_data SET derivative_id=" + derivative_id + ","
+        query += 'num_engine=' + num_engine + ","
+        query += 'flight_cycle=' + flight_cycle + ','
+        query += 'market_value=' + market_value + ','
+        query += 'payload=' + payload
+        query += ' WHERE jet_id=' + jet_id + ';'
+        cursor = db.execute_query(db_connection=db_connection, query=query)
+
 
     elif table_name == 'lease':
-        pass
+        lease_id = request.form['update']
+        customer_id = request.form['customer_id']
+        jet_id = request.form['jet_id']
+        lease_status = "'" + request.form['lease_status'] + "'"
+        start_date = "'" + request.form['start_date'] + "'"
+        end_date = "'" + request.form['end_date'] + "'"
+        duration = request.form['duration']
+        ground_staff_included = request.form['ground_staff_included']
+        crew_included = request.form['crew_included']
+        lease_value = request.form['lease_value']
+        payment_to_date = request.form['payment_to_date']
+        payment_remaining = request.form['payment_remaining']
+
+        query = "UPDATE lease SET customer_id=" + customer_id + ","
+        query += 'jet_id=' + jet_id + ","
+        query += 'lease_status=' + lease_status + ','
+        query += 'start_date=' + start_date + ','
+        query += 'end_date=' + end_date + ","
+        query += 'duration=' + duration + ','
+        query += 'ground_staff_included=' + ground_staff_included + ','
+        query += 'crew_included=' + crew_included + ','
+        query += 'lease_value=' + lease_value + ','
+        query += 'payment_to_date=' + payment_to_date + ','
+        query += 'payment_remaining=' + payment_remaining
+        query += ' WHERE lease_id=' + lease_id + ';'
+        cursor = db.execute_query(db_connection=db_connection, query=query)
 
     elif table_name == 'lease_request':
-        pass
+        request_id = request.form['update']
+        customer_id = request.form['customer_id']
+        derivative_id = request.form['derivative_id']
+        need_ground_staff = request.form['need_ground_staff']
+        need_crew = request.form['need_crew']
 
+        query = "UPDATE lease_request SET customer_id=" + customer_id + ","
+        query += 'derivative_id=' + derivative_id + ","
+        query += 'need_ground_staff=' + need_ground_staff + ','
+        query += 'need_crew=' + need_crew
+        query += ' WHERE request_id=' + request_id + ';'
+        cursor = db.execute_query(db_connection=db_connection, query=query)
+
+	# *** Note: This one is going to need some SERIOUS Re-work to actually work ***
     elif table_name == 'aircraft_assignment':
-        pass
+        lease_id = request.form['lease_id']
+        employee_id = request.form['employee_id']
+
+        query = "UPDATE aircraft_assignment SET lease_id=" + lease_id + ","
+        query += 'employee_id=' + employee_id
+        query += ' WHERE lease_id=' + lease_id + ';'
+        cursor = db.execute_query(db_connection=db_connection, query=query)
 
     elif table_name == 'derivative_data':
-        pass
+        derivative_id = request.form['update']
+        model_derivative = "'" + request.form['model_derivative'] + "'"
+        body_style = "'" + request.form['body_style'] + "'"
+        primary_use = "'" + request.form['primary_use'] + "'"
+        flight_range = request.form['flight_range']
+        max_seating = request.form['max_seating']
+        fuel_efficiency = request.form['fuel_efficiency']
+        max_takeoff_weight = request.form['max_takeoff_weight']
+
+        query = "UPDATE darivative_data SET model_derivative=" + model_derivative + ","
+        query += 'body_style=' + body_style + ","
+        query += 'primary_use=' + primary_use + ','
+        query += 'flight_range=' + flight_range + ','
+        query += 'max_seating=' + max_seating + ','
+        query += 'fuel_efficiency=' + fuel_efficiency + ','
+        query += 'max_takeoff_weight=' + max_takeoff_weight
+        query += ' WHERE derivative_id=' + derivative_id + ';'
+        cursor = db.execute_query(db_connection=db_connection, query=query)
 
 # --- Routes ---
 @app.route('/')
@@ -284,6 +358,8 @@ def customers():
 			table_insert('customer', request)
 		if 'delete' in request.form.keys():
 			table_delete('customer', request)
+		if 'update' in request.form.keys():
+			table_update('customer', request)
 		results = select_data('customer')
 		return render_template("customer.j2", customers=results)
 
@@ -310,6 +386,8 @@ def jet_data():
 			table_insert('jet_data', request)
 		if 'delete' in request.form.keys():
 			table_delete('jet_data', request)
+		if 'update' in request.form.keys():
+			table_update('jet_data', request)
 		results = select_data('jet_data')
 		return render_template('jet_data.j2', jets=results)
 
@@ -336,6 +414,8 @@ def derivative_data():
 			table_insert('derivative_data', request)
 		if 'delete' in request.form.keys():
 			table_delete('derivative_data', request)
+		if 'update' in request.form.keys():
+			table_update('derivative_data', request)
 		results = select_data('derivative_data')
 		return render_template('derivative_data.j2', data=results)
 
@@ -363,6 +443,8 @@ def lease():
 		if 'delete' in request.form.keys():
 			table_delete('lease', request)
 		results = select_data('lease')
+		if 'update' in request.form.keys():
+			table_update('lease', request)
 		return render_template('lease.j2', data=results)
 
 
@@ -389,6 +471,8 @@ def lease_request():
 			table_insert('lease_request', request)
 		if 'delete' in request.form.keys():
 			table_delete('lease_request', request)
+		if 'update' in request.form.keys():
+			table_update('lease_request', request)
 		results = select_data('lease_request')
 		return render_template('lease_request.j2', data=results)
 
@@ -415,6 +499,8 @@ def aircraft_assignment():
 			table_insert('aircraft_assignment', request)
 		if 'delete' in request.form.keys():
 			table_delete('aircraft_assignment', request)
+		if 'update' in request.form.keys():
+			table_update('aircraft_assignment', request)
 		results = select_data('aircraft_assignment')
 		return render_template('aircraft_assignment.j2', data=results)
 
