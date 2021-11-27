@@ -182,12 +182,10 @@ def table_update(table_name, request):
     :return:  Updates the table.
     """
     if table_name == 'customer':
-        print('in customer')
-        print(request.form)
         customer_id = request.form['update']
         name = "'" + request.form['name'] + "'"
         print('assigning variables')
-        print(request.form['contact_num'])
+        print(name)
         # It dies after this!!!
         #print(request.form['contact_num'])
         #contact_num = "'" + request.form['contact_num'] + "'"
@@ -199,7 +197,7 @@ def table_update(table_name, request):
         #query += 'address=' + address
         #query += ' WHERE customer_id=' + customer_id + ';'
         #print('here is the query!\n', query)
-        cursor = db.execute_query(db_connection=db_connection, query=query)
+        #cursor = db.execute_query(db_connection=db_connection, query=query)
 
     elif table_name == 'employee':
         employee_id = request.form['update']
