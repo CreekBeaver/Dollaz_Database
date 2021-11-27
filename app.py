@@ -280,10 +280,13 @@ def table_update(table_name, request):
     elif table_name == 'aircraft_assignment':
         lease_id = request.form['lease_id']
         employee_id = request.form['employee_id']
+        old_lease = request.form['update'][1]
+        old_employee = request.form['update'][4]
 
         query = "UPDATE aircraft_assignment SET lease_id=" + lease_id + ","
         query += 'employee_id=' + employee_id
-        query += ' WHERE lease_id=' + lease_id + ';'
+        query += ' WHERE (lease_id=' + old_lease + ' AND '
+        query += 'employee_id=' + old_employee + ");"
         cursor = db.execute_query(db_connection=db_connection, query=query)
 
     elif table_name == 'derivative_data':
@@ -499,10 +502,7 @@ def aircraft_assignment():
         if 'delete' in request.form.keys():
             table_delete('aircraft_assignment', request)
         if 'update' in request.form.keys():
-            #table_update('aircraft_assignment', request)
-            print(request.form)
-            print(request.form['update'][1])
-            print(request.form['update'][4])
+            table_update('aircraft_assignment', request)
         results = select_data('aircraft_assignment')
         return render_template('aircraft_assignment.j2', data=results)
 
@@ -511,8 +511,6 @@ def aircraft_assignment():
 def update_aircraft_assignment():
     db_connection = db.connect_to_database()
     if request.method == "POST":
-        lease_id = request.form['update'][1]
-        employee_id = request.form['update'][4]
         query = "SELECT * FROM aircraft_assignment WHERE (lease_id = " + lease_id
         query += " AND employee_id = " + employee_id + ");"
         cursor = db.execute_query(db_connection=db_connection, query=query)
