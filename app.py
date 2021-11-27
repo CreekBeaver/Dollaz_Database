@@ -8,6 +8,7 @@ app = Flask(__name__)
 # Database connection
 db_connection = db.connect_to_database()
 
+
 def table_insert(table_name, request):
     """
     Wrapper will perform the insert operations on an SQL Table
@@ -16,20 +17,18 @@ def table_insert(table_name, request):
     :return: None Updates will occur in the Database
     """
     db_connection = db.connect_to_database()
-	# tested and worked with good data
+
     if table_name == 'customer':
         # Insert Functionality
         name = "'" + request.form['name'] + "'"
         contact_num = "'" + request.form['contact_num'] + "'"
         address = "'" + request.form['address'] + "'"
 
-
         query = "INSERT into customer (name, contact_num, address)"
         query += "VALUES (" + name + ',' + contact_num + ',' + address
         query += ');'
         cursor = db.execute_query(db_connection=db_connection, query=query)
 
-	# tested and worked with good data
     elif table_name == 'employee':
         # Insert Functionality
         first_name = "'" + request.form['first_name'] + "'"
@@ -49,7 +48,7 @@ def table_insert(table_name, request):
         query += "VALUES (" + first_name + ',' + last_name + ',' + start_date + ',' + end_date + ',' + title + ',' + salary
         query += ');'
         cursor = db.execute_query(db_connection=db_connection, query=query)
-	# tested and worked with good data
+
     elif table_name == 'jet_data':
         # Insert Functionality
         derivative_id = request.form['derivative_id']
@@ -62,7 +61,7 @@ def table_insert(table_name, request):
         query += "VALUES (" + derivative_id + ',' + num_engine + ',' + flight_cycle + ',' + market_value + ',' + payload
         query += ');'
         cursor = db.execute_query(db_connection=db_connection, query=query)
-	# tested and worked with good data
+
     elif table_name == 'lease':
         customer_id = request.form['customer_id']
         jet_id = request.form['jet_id']
@@ -81,7 +80,7 @@ def table_insert(table_name, request):
         query += "VALUES (" + customer_id + ',' + jet_id + ',' + lease_status + ',' + start_date + ',' + end_date + ',' + duration + ',' + ground_staff_included + ',' + crew_included + ',' + lease_value + ',' + payment_to_date + ',' + payment_remaining
         query += ');'
         cursor = db.execute_query(db_connection=db_connection, query=query)
-	# tested and worked with good data
+
     elif table_name == 'lease_request':
         customer_id = request.form['customer_id']
         derivative_id = request.form['derivative_id']
@@ -92,18 +91,16 @@ def table_insert(table_name, request):
         query += "VALUES (" + customer_id + ',' + derivative_id + ',' + need_ground_staff + ',' + need_crew
         query += ');'
         cursor = db.execute_query(db_connection=db_connection, query=query)
-	# tested and worked with good data
+
     elif table_name == 'aircraft_assignment':
         lease_id = request.form['lease_id']
         employee_id = request.form['employee_id']
-
 
         query = "INSERT into aircraft_assignment (lease_id, employee_id)"
         query += "VALUES (" + lease_id + ',' + employee_id
         query += ');'
         cursor = db.execute_query(db_connection=db_connection, query=query)
 
-	# tested and worked with good data
     elif table_name == 'derivative_data':
         # Insert Functionality
         model_derivative = "'" + request.form['model_derivative'] + "'"
@@ -114,11 +111,11 @@ def table_insert(table_name, request):
         fuel_efficiency = request.form['fuel_efficiency']
         max_takeoff_weight = request.form['max_takeoff_weight']
 
-
         query = "INSERT into derivative_data (model_derivative, body_style, primary_use, flight_range, max_seating, fuel_efficiency, max_takeoff_weight)"
         query += "VALUES (" + model_derivative + ',' + body_style + ',' + primary_use + ',' + flight_range + ',' + max_seating + ',' + fuel_efficiency + ',' + max_takeoff_weight
         query += ');'
         cursor = db.execute_query(db_connection=db_connection, query=query)
+
 
 def table_delete(table_name, request):
     """
@@ -163,20 +160,29 @@ def table_delete(table_name, request):
         query += request.form['delete'] + ';'
         cursor = db.execute_query(db_connection=db_connection, query=query)
 
+
 def select_data(table_name):
-	"""
-	Performs a query for a given table to return all data.
-	:param table_name: String, Consisting of a table name
-	:return: Query from an SQL Tble.
-	"""
-	db_connection = db.connect_to_database()
-	query = "SELECT * FROM " + table_name + ";"
-	cursor = db.execute_query(db_connection=db_connection, query=query)
-	results = cursor.fetchall()
-	return results
+    """
+    Performs a query for a given table to return all data.
+    :param table_name: String, Consisting of a table name
+    :return: Query from an SQL Tble.
+    """
+    db_connection = db.connect_to_database()
+    query = "SELECT * FROM " + table_name + ";"
+    cursor = db.execute_query(db_connection=db_connection, query=query)
+    results = cursor.fetchall()
+    return results
+
 
 def table_update(table_name, request):
+    """
+    Performs an upate of a table in SQL
+    :param table_name: Name of the table
+    :param request: Request from the form
+    :return:  Updates the table.
+    """
     if table_name == 'customer':
+        print("updating customer table")
         customer_id = request.form['update']
         name = "'" + request.form['name'] + "'"
         contact_num = "'" + request.form['contact_num'] + "'"
@@ -195,8 +201,7 @@ def table_update(table_name, request):
         start_date = "'" + request.form['employment_start_date'] + "'"
 
         # Need to handle the Null Entry
-        if request.form['employment_end_date'].lower() == 'none' or request.form[
-        'employment_end_date'].lower() == 'null':
+        if request.form['employment_end_date'].lower() == 'none' or request.form['employment_end_date'].lower() == 'null':
             end_date = "NULL"
         else:
             end_date = "'" + request.form['employment_end_date'] + "'"
@@ -227,7 +232,6 @@ def table_update(table_name, request):
         query += 'payload=' + payload
         query += ' WHERE jet_id=' + jet_id + ';'
         cursor = db.execute_query(db_connection=db_connection, query=query)
-
 
     elif table_name == 'lease':
         lease_id = request.form['update']
@@ -271,7 +275,7 @@ def table_update(table_name, request):
         query += ' WHERE request_id=' + request_id + ';'
         cursor = db.execute_query(db_connection=db_connection, query=query)
 
-	# *** Note: This one is going to need some SERIOUS Re-work to actually work ***
+    # *** Note: This one is going to need some SERIOUS Re-work to actually work ***
     elif table_name == 'aircraft_assignment':
         lease_id = request.form['lease_id']
         employee_id = request.form['employee_id']
@@ -302,36 +306,33 @@ def table_update(table_name, request):
         cursor = db.execute_query(db_connection=db_connection, query=query)
 
 # --- Routes ---
+
+
 @app.route('/')
 def root():
-	db_connection = db.connect_to_database()
-	return render_template("index.j2")
+    db_connection = db.connect_to_database()
+    return render_template("index.j2")
 
 
 @app.route('/employee', methods=['GET', 'POST'])
 def employee():
-	db_connection = db.connect_to_database()
-	if request.method == "GET":
-		results = select_data('employee')
-		return render_template('employee.j2', data=results)
-	if request.method == "POST":
+    db_connection = db.connect_to_database()
+    if request.method == "GET":
+        results = select_data('employee')
+        return render_template('employee.j2', data=results)
+    if request.method == "POST":
+        # Insert Functionality
+        if 'add_row' in request.form.keys():
+            table_insert('employee', request)
+        # Delete Functionality
+        if 'delete' in request.form.keys():
+            table_delete('employee', request)
+        # Update Functionality
+        if 'update' in request.form.keys():
+            table_update('employee', request)
 
-		# Insert Functionality
-		if 'add_row' in request.form.keys():
-			table_insert('employee', request)
-
-
-		# Delete Functionality
-		if 'delete' in request.form.keys():
-			table_delete('employee', request)
-
-
-		# Update Functionality
-		if 'update' in request.form.keys():
-			table_update('employee', request)
-
-		results = select_data('employee')
-		return render_template('employee.j2', data=results)
+        results = select_data('employee')
+        return render_template('employee.j2', data=results)
 
 
 @app.route('/update_employee', methods=['GET','POST'])
