@@ -188,12 +188,12 @@ def table_update(table_name, request):
         name = "'" + request.form['name'] + "'"
         contact_num = "'" + request.form['contact_num'] + "'"
         address = "'" + request.form['address'] + "'"
-
+        print('before query')
         query = "UPDATE customer SET name=" + name + ","
         query += 'contact_num=' + contact_num + ","
         query += 'address=' + address
         query += ' WHERE customer_id=' + customer_id + ';'
-        print('here is the query\n', query)
+        print('here is the query!\n', query)
         cursor = db.execute_query(db_connection=db_connection, query=query)
 
     elif table_name == 'employee':
