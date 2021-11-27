@@ -491,8 +491,8 @@ def update_lease_request():
 
 @app.route('/aircraft_assignment', methods=["GET", "POST"])
 def aircraft_assignment():
-	db_connection = db.connect_to_database()
-	if request.method == "GET":
+    db_connection = db.connect_to_database()
+    if request.method == "GET":
 		results = select_data('aircraft_assignment')
 		return render_template('aircraft_assignment.j2', data=results)
 	if request.method == "POST":
@@ -508,15 +508,19 @@ def aircraft_assignment():
 
 @app.route('/update_aircraft_assignment', methods=["GET", "POST"])
 def update_aircraft_assignment():
-	db_connection = db.connect_to_database()
-	if request.method == "GET":
-		lease_id = request.args['update']
-		query = "SELECT * FROM aircraft_assignment WHERE lease_id = " + lease_id + ";"
-		cursor = db.execute_query(db_connection=db_connection, query=query)
-		results = cursor.fetchall()
-		return render_template('update_aircraft_assignment.j2', data=results)
+    db_connection = db.connect_to_database()
+    if request.method == "GET":
+        lease_id = request.args['update'][0]
+        employee_id = request.args['update'][1]
+        query = "SELECT * FROM aircraft_assignment WHERE lease_id = " + lease_id
+        query += "AND employee_id = " + employee_id + ";"
+        cursor = db.execute_query(db_connection=db_connection, query=query)
+        results = cursor.fetchall()
+        return render_template('update_aircraft_assignment.j2', data=results)
 
 # Filter employees by last name
+
+
 @app.route("/filter_employee", methods =["GET", "POST"])
 def filter_employees():
 	db_connection = db.connect_to_database()
