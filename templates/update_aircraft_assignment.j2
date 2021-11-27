@@ -60,7 +60,7 @@
                 <td><input class="form-control" type="text" name="lease_id" value="{{ data[0]['lease_id'] }}"></td>
                 <td><input class="form-control" type="text" name="employee_id" value="{{ data[0]['employee_id'] }}" ></td>
                 <td>
-                    <button type="submit" name="update" value="{{ data[0]['lease_id'] }}">Submit Updates</button>
+                    <button type="submit" name="update" value="{{ data[0]['lease_id'],data[0]['employee_id'] }}">Submit Updates</button>
                 </td>
 
             </form>
