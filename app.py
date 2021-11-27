@@ -193,6 +193,7 @@ def table_update(table_name, request):
         query += 'contact_num=' + contact_num + ","
         query += 'address=' + address
         query += ' WHERE customer_id=' + customer_id + ';'
+        print('here is the query\n', query)
         cursor = db.execute_query(db_connection=db_connection, query=query)
 
     elif table_name == 'employee':
