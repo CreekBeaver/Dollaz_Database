@@ -17,8 +17,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="553">
-                  <caret line="513" column="19" selection-start-line="513" selection-start-column="19" selection-end-line="513" selection-end-column="19" />
+                <state relative-caret-position="399">
+                  <caret line="502" column="31" selection-start-line="502" selection-start-column="31" selection-end-line="502" selection-end-column="31" />
                   <folding>
                     <element signature="e#0#55#0" expanded="true" />
                   </folding>
@@ -102,7 +102,7 @@
       </split-first>
       <split-second>
         <leaf>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/templates/update_aircraft_assignment.j2">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="504">
@@ -111,7 +111,7 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/templates/aircraft_assignment.j2">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="688">
@@ -457,13 +457,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/update_aircraft_assignment.j2">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="48" column="28" lean-forward="true" selection-start-line="48" selection-start-column="28" selection-end-line="48" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/aircraft_assignment.j2">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="688">
@@ -471,10 +464,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/update_aircraft_assignment.j2">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="48" column="28" lean-forward="true" selection-start-line="48" selection-start-column="28" selection-end-line="48" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="553">
-          <caret line="513" column="19" selection-start-line="513" selection-start-column="19" selection-end-line="513" selection-end-column="19" />
+        <state relative-caret-position="399">
+          <caret line="502" column="31" selection-start-line="502" selection-start-column="31" selection-end-line="502" selection-end-column="31" />
           <folding>
             <element signature="e#0#55#0" expanded="true" />
           </folding>

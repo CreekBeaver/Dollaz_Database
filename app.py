@@ -499,7 +499,8 @@ def aircraft_assignment():
         if 'delete' in request.form.keys():
             table_delete('aircraft_assignment', request)
         if 'update' in request.form.keys():
-            table_update('aircraft_assignment', request)
+            #table_update('aircraft_assignment', request)
+            print(request.form)
         results = select_data('aircraft_assignment')
         return render_template('aircraft_assignment.j2', data=results)
 
