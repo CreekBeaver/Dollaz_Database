@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="fed95846-30de-456a-b488-71845ed41439" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/aircraft_assignment.j2" beforeDir="false" afterPath="$PROJECT_DIR$/templates/aircraft_assignment.j2" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,8 +17,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="497">
-                  <caret line="514" column="80" selection-start-line="514" selection-start-column="80" selection-end-line="514" selection-end-column="80" />
+                <state relative-caret-position="763">
+                  <caret line="534" lean-forward="true" selection-start-line="534" selection-end-line="534" />
                   <folding>
                     <element signature="e#0#55#0" expanded="true" />
                   </folding>
@@ -474,8 +473,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="497">
-          <caret line="514" column="80" selection-start-line="514" selection-start-column="80" selection-end-line="514" selection-end-column="80" />
+        <state relative-caret-position="763">
+          <caret line="534" lean-forward="true" selection-start-line="534" selection-end-line="534" />
           <folding>
             <element signature="e#0#55#0" expanded="true" />
           </folding>

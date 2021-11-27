@@ -338,172 +338,170 @@ def employee():
 
 @app.route('/update_employee', methods=['GET','POST'])
 def update_employee():
-	db_connection = db.connect_to_database()
-	# Obtain the Update Employee Page
-	if request.method == "GET":
-		employee_id = request.args['update']
-		query = "SELECT * FROM employee WHERE employee_id = " + employee_id + ";"
-		cursor = db.execute_query(db_connection=db_connection, query=query)
-		results = cursor.fetchall()
-		return render_template('update_employee.j2', data=results)
+    db_connection = db.connect_to_database()
+    if request.method == "GET":
+        employee_id = request.args['update']
+        query = "SELECT * FROM employee WHERE employee_id = " + employee_id + ";"
+        cursor = db.execute_query(db_connection=db_connection, query=query)
+        results = cursor.fetchall()
+        return render_template('update_employee.j2', data=results)
 
 
 @app.route('/customer', methods=['GET', 'POST'])
 def customers():
-	db_connection = db.connect_to_database()
-	if request.method == "GET":
-		results = select_data('customer')
-		return render_template('customer.j2', customers=results)
-	if request.method == "POST":
-		if 'add_row' in request.form.keys():
-			table_insert('customer', request)
-		if 'delete' in request.form.keys():
-			table_delete('customer', request)
-		if 'update' in request.form.keys():
-			table_update('customer', request)
-		results = select_data('customer')
-		return render_template("customer.j2", customers=results)
+    db_connection = db.connect_to_database()
+    if request.method == "GET":
+        results = select_data('customer')
+        return render_template('customer.j2', customers=results)
+    if request.method == "POST":
+        if 'add_row' in request.form.keys():
+            table_insert('customer', request)
+        if 'delete' in request.form.keys():
+            table_delete('customer', request)
+        if 'update' in request.form.keys():
+            table_update('customer', request)
+        results = select_data('customer')
+        return render_template("customer.j2", customers=results)
 
 
 @app.route('/update_customer', methods=['GET','POST'])
 def update_customer():
-	db_connection = db.connect_to_database()
-	if request.method == "GET":
-		customer_id = request.args['update']
-		query = "SELECT * FROM customer WHERE customer_id = " + customer_id + ";"
-		cursor = db.execute_query(db_connection=db_connection, query=query)
-		results = cursor.fetchall()
-		return render_template('update_customer.j2', customers=results)
+    db_connection = db.connect_to_database()
+    if request.method == "GET":
+        customer_id = request.args['update']
+        query = "SELECT * FROM customer WHERE customer_id = " + customer_id + ";"
+        cursor = db.execute_query(db_connection=db_connection, query=query)
+        results = cursor.fetchall()
+        return render_template('update_customer.j2', customers=results)
 
 
 @app.route('/jet_data', methods=["GET", "POST"])
 def jet_data():
-	db_connection = db.connect_to_database()
-	if request.method == "GET":
-		results = select_data('jet_data')
-		return render_template('jet_data.j2', jets=results)
-	if request.method == "POST":
-		if 'add_row' in request.form.keys():
-			table_insert('jet_data', request)
-		if 'delete' in request.form.keys():
-			table_delete('jet_data', request)
-		if 'update' in request.form.keys():
-			table_update('jet_data', request)
-		results = select_data('jet_data')
-		return render_template('jet_data.j2', jets=results)
+    db_connection = db.connect_to_database()
+    if request.method == "GET":
+        results = select_data('jet_data')
+        return render_template('jet_data.j2', jets=results)
+    if request.method == "POST":
+        if 'add_row' in request.form.keys():
+            table_insert('jet_data', request)
+        if 'delete' in request.form.keys():
+            table_delete('jet_data', request)
+        if 'update' in request.form.keys():
+            table_update('jet_data', request)
+        results = select_data('jet_data')
+        return render_template('jet_data.j2', jets=results)
 
 
 @app.route('/update_jet_data', methods=["GET", "POST"])
 def update_jet_data():
-	db_connection = db.connect_to_database()
-	if request.method == "GET":
-		jet_id = request.args['update']
-		query = "SELECT * FROM jet_data WHERE jet_id = " + jet_id + ";"
-		cursor = db.execute_query(db_connection=db_connection, query=query)
-		results = cursor.fetchall()
-		return render_template('update_jet_data.j2', jets=results)
+    db_connection = db.connect_to_database()
+    if request.method == "GET":
+        jet_id = request.args['update']
+        query = "SELECT * FROM jet_data WHERE jet_id = " + jet_id + ";"
+        cursor = db.execute_query(db_connection=db_connection, query=query)
+        results = cursor.fetchall()
+        return render_template('update_jet_data.j2', jets=results)
 
 
 @app.route('/derivative_data', methods=["GET", "POST"])
 def derivative_data():
-	db_connection = db.connect_to_database()
-	if request.method == "GET":
-		results = select_data('derivative_data')
-		return render_template('derivative_data.j2', data=results)
-	if request.method =="POST":
-		if 'add_row' in request.form.keys():
-			table_insert('derivative_data', request)
-		if 'delete' in request.form.keys():
-			table_delete('derivative_data', request)
-		if 'update' in request.form.keys():
-			table_update('derivative_data', request)
-		results = select_data('derivative_data')
-		return render_template('derivative_data.j2', data=results)
+    db_connection = db.connect_to_database()
+    if request.method == "GET":
+        results = select_data('derivative_data')
+        return render_template('derivative_data.j2', data=results)
+    if request.method =="POST":
+        if 'add_row' in request.form.keys():
+            table_insert('derivative_data', request)
+        if 'delete' in request.form.keys():
+            table_delete('derivative_data', request)
+        if 'update' in request.form.keys():
+            table_update('derivative_data', request)
+        results = select_data('derivative_data')
+        return render_template('derivative_data.j2', data=results)
 
 
 @app.route('/update_derivative_data')
 def update_derivative_data():
-	db_connection = db.connect_to_database()
-	if request.method == "GET":
-		derivative_id = request.args['update']
-		query = "SELECT * FROM derivative_data WHERE derivative_id = " + derivative_id + ";"
-		cursor = db.execute_query(db_connection=db_connection, query=query)
-		results = cursor.fetchall()
-		return render_template('update_derivative_data.j2', data=results)
+    db_connection = db.connect_to_database()
+    if request.method == "GET":
+        derivative_id = request.args['update']
+        query = "SELECT * FROM derivative_data WHERE derivative_id = " + derivative_id + ";"
+        cursor = db.execute_query(db_connection=db_connection, query=query)
+        results = cursor.fetchall()
+        return render_template('update_derivative_data.j2', data=results)
 
 
 @app.route('/lease', methods=["GET", "POST"])
 def lease():
-	db_connection = db.connect_to_database()
-	if request.method == "GET":
-		results = select_data('lease')
-		return render_template('lease.j2', data=results)
-	if request.method == "POST":
-		if 'add_row' in request.form.keys():
-			table_insert('lease', request)
-		if 'delete' in request.form.keys():
-			table_delete('lease', request)
-		results = select_data('lease')
-		if 'update' in request.form.keys():
-			table_update('lease', request)
-		results = select_data('lease')
-		return render_template('lease.j2', data=results)
+    db_connection = db.connect_to_database()
+    if request.method == "GET":
+        results = select_data('lease')
+        return render_template('lease.j2', data=results)
+    if request.method == "POST":
+        if 'add_row' in request.form.keys():
+            table_insert('lease', request)
+        if 'delete' in request.form.keys():
+            table_delete('lease', request)
+        if 'update' in request.form.keys():
+            table_update('lease', request)
+        results = select_data('lease')
+        return render_template('lease.j2', data=results)
 
 
 @app.route('/update_lease', methods=["GET", "POST"])
 def update_lease():
-	db_connection = db.connect_to_database()
-	if request.method == "GET":
-		lease_id = request.args['update']
-		query = "SELECT * FROM lease WHERE lease_id = " + lease_id + ";"
-		cursor = db.execute_query(db_connection=db_connection, query=query)
-		results = cursor.fetchall()
-		return render_template('update_lease.j2', data=results)
+    db_connection = db.connect_to_database()
+    if request.method == "GET":
+        lease_id = request.args['update']
+        query = "SELECT * FROM lease WHERE lease_id = " + lease_id + ";"
+        cursor = db.execute_query(db_connection=db_connection, query=query)
+        results = cursor.fetchall()
+        return render_template('update_lease.j2', data=results)
 
 
 @app.route('/lease_request', methods=["GET", "POST"])
 def lease_request():
-	db_connection = db.connect_to_database()
-	if request.method == "GET":
-		results = select_data('lease_request')
-		return render_template('lease_request.j2', data=results)
-	if request.method == "POST":
-		if 'add_row' in request.form.keys():
-			table_insert('lease_request', request)
-		if 'delete' in request.form.keys():
-			table_delete('lease_request', request)
-		if 'update' in request.form.keys():
-			table_update('lease_request', request)
-		results = select_data('lease_request')
-		return render_template('lease_request.j2', data=results)
+    db_connection = db.connect_to_database()
+    if request.method == "GET":
+        results = select_data('lease_request')
+        return render_template('lease_request.j2', data=results)
+    if request.method == "POST":
+        if 'add_row' in request.form.keys():
+            table_insert('lease_request', request)
+        if 'delete' in request.form.keys():
+            table_delete('lease_request', request)
+        if 'update' in request.form.keys():
+            table_update('lease_request', request)
+        results = select_data('lease_request')
+        return render_template('lease_request.j2', data=results)
 
 
 @app.route('/update_lease_request', methods=["GET", "POST"])
 def update_lease_request():
-	db_connection = db.connect_to_database()
-	if request.method == "GET":
-		request_id = request.args['update']
-		query = "SELECT * FROM lease_request WHERE request_id = " + request_id + ";"
-		cursor = db.execute_query(db_connection=db_connection, query=query)
-		results = cursor.fetchall()
-		return render_template('update_lease_request.j2', data=results)
+    db_connection = db.connect_to_database()
+    if request.method == "GET":
+        request_id = request.args['update']
+        query = "SELECT * FROM lease_request WHERE request_id = " + request_id + ";"
+        cursor = db.execute_query(db_connection=db_connection, query=query)
+        results = cursor.fetchall()
+        return render_template('update_lease_request.j2', data=results)
 
 
 @app.route('/aircraft_assignment', methods=["GET", "POST"])
 def aircraft_assignment():
     db_connection = db.connect_to_database()
     if request.method == "GET":
-		results = select_data('aircraft_assignment')
-		return render_template('aircraft_assignment.j2', data=results)
-	if request.method == "POST":
-		if 'add_row' in request.form.keys():
-			table_insert('aircraft_assignment', request)
-		if 'delete' in request.form.keys():
-			table_delete('aircraft_assignment', request)
-		if 'update' in request.form.keys():
-			table_update('aircraft_assignment', request)
-		results = select_data('aircraft_assignment')
-		return render_template('aircraft_assignment.j2', data=results)
+        results = select_data('aircraft_assignment')
+        return render_template('aircraft_assignment.j2', data=results)
+    if request.method == "POST":
+        if 'add_row' in request.form.keys():
+            table_insert('aircraft_assignment', request)
+        if 'delete' in request.form.keys():
+            table_delete('aircraft_assignment', request)
+        if 'update' in request.form.keys():
+            table_update('aircraft_assignment', request)
+        results = select_data('aircraft_assignment')
+        return render_template('aircraft_assignment.j2', data=results)
 
 
 @app.route('/update_aircraft_assignment', methods=["GET", "POST"])
@@ -523,17 +521,19 @@ def update_aircraft_assignment():
 
 @app.route("/filter_employee", methods =["GET", "POST"])
 def filter_employees():
-	db_connection = db.connect_to_database()
-	if request.method == "POST":
-		employee_id = request.form['employee_filter']
-		query = "SELECT * FROM employee WHERE employee_id = " + employee_id + ";"
-		# Filter employees by last name
-		cursor = db.execute_query(db_connection=db_connection, query=query)
-		results = cursor.fetchall()
-		return render_template('employee.j2', data=results)
+    db_connection = db.connect_to_database()
+    if request.method == "POST":
+        employee_id = request.form['employee_filter']
+        query = "SELECT * FROM employee WHERE employee_id = " + employee_id + ";"
+        # Filter employees by last name
+        cursor = db.execute_query(db_connection=db_connection, query=query)
+        results = cursor.fetchall()
+        return render_template('employee.j2', data=results)
 
 # Listener
+
+
 if __name__ == "__main__":
-	port = int(os.environ.get('PORT', 4520))
-	app.run(port=port, debug=True)
-	#app.run(host="flip1.engr.oregonstate.edu", port=4518, debug=True)
+    port = int(os.environ.get('PORT', 4520))
+    app.run(port=port, debug=True)
+    #app.run(host="flip1.engr.oregonstate.edu", port=4518, debug=True)
