@@ -507,11 +507,9 @@ def aircraft_assignment():
 @app.route('/update_aircraft_assignment', methods=["GET", "POST"])
 def update_aircraft_assignment():
     db_connection = db.connect_to_database()
-    if request.method == "GET":
-        print(request.form)
-        print(request.form['update'])
-        lease_id = request.args['update'][0]
-        employee_id = request.args['update'][1]
+    if request.method == "POST":
+        lease_id = request.form['update'][0]
+        employee_id = request.form['update'][1]
         query = "SELECT * FROM aircraft_assignment WHERE lease_id = " + lease_id
         query += "AND employee_id = " + employee_id + ";"
         cursor = db.execute_query(db_connection=db_connection, query=query)
