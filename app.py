@@ -511,7 +511,7 @@ def update_aircraft_assignment():
         lease_id = request.form['update'][1]
         employee_id = request.form['update'][4]
         query = "SELECT * FROM aircraft_assignment WHERE (lease_id = " + lease_id
-        query += "AND employee_id = " + employee_id + ");"
+        query += " AND employee_id = " + employee_id + ");"
         cursor = db.execute_query(db_connection=db_connection, query=query)
         results = cursor.fetchall()
         return render_template('update_aircraft_assignment.j2', data=results)
