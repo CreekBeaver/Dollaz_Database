@@ -155,8 +155,9 @@ ADD CONSTRAINT fk_lease_1
 FOREIGN KEY (customer_id)
 REFERENCES customer(customer_id)
 ON DELETE CASCADE
-ON UPDATE CASCADE,
+ON UPDATE CASCADE;
 
+ALTER TABLE lease
 ADD CONSTRAINT fk_lease_2
 FOREIGN KEY (jet_id)
 REFERENCES jet_data(jet_id)
@@ -168,8 +169,9 @@ ADD CONSTRAINT fk_lr_1
 FOREIGN KEY (customer_id)
 REFERENCES customer(customer_id)
 ON DELETE CASCADE
-ON UPDATE CASCADE,
+ON UPDATE CASCADE;
 
+ALTER TABLE lease_request
 ADD CONSTRAINT fk_lr_2
 FOREIGN KEY (derivative_id)
 REFERENCES derivative_data(derivative_id)
