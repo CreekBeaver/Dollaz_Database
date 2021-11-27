@@ -501,9 +501,8 @@ def aircraft_assignment():
         if 'update' in request.form.keys():
             #table_update('aircraft_assignment', request)
             print(request.form)
-            print(request.form['update'])
-            print(type(request.form['update']))
-            print(request.form['update'].split(','))
+            print(request.form['update'][1])
+            print(request.form['update'][4])
         results = select_data('aircraft_assignment')
         return render_template('aircraft_assignment.j2', data=results)
 
