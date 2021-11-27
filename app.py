@@ -508,6 +508,8 @@ def aircraft_assignment():
 def update_aircraft_assignment():
     db_connection = db.connect_to_database()
     if request.method == "GET":
+        print(request.form)
+        print(request.form['update'])
         lease_id = request.args['update'][0]
         employee_id = request.args['update'][1]
         query = "SELECT * FROM aircraft_assignment WHERE lease_id = " + lease_id
