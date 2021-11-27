@@ -511,6 +511,8 @@ def aircraft_assignment():
 def update_aircraft_assignment():
     db_connection = db.connect_to_database()
     if request.method == "POST":
+        lease_id = request.form['update'][1]
+        employee_id = request.form['update'][4]
         query = "SELECT * FROM aircraft_assignment WHERE (lease_id = " + lease_id
         query += " AND employee_id = " + employee_id + ");"
         cursor = db.execute_query(db_connection=db_connection, query=query)
