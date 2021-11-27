@@ -503,7 +503,7 @@ def aircraft_assignment():
             print(request.form)
             print(request.form['update'])
             print(type(request.form['update']))
-            print(request.form['update'].split())
+            print(request.form['update'].split(','))
         results = select_data('aircraft_assignment')
         return render_template('aircraft_assignment.j2', data=results)
 
