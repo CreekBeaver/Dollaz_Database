@@ -182,7 +182,8 @@ def table_update(table_name, request):
     :return:  Updates the table.
     """
     if table_name == 'customer':
-        print("updating customer table")
+        print('in customer')
+        print(request.form)
         customer_id = request.form['update']
         name = "'" + request.form['name'] + "'"
         contact_num = "'" + request.form['contact_num'] + "'"
