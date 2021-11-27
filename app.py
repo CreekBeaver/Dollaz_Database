@@ -184,20 +184,16 @@ def table_update(table_name, request):
     if table_name == 'customer':
         customer_id = request.form['update']
         name = "'" + request.form['name'] + "'"
-        print('assigning variables')
-        print(name)
-        # It dies after this!!!
-        #print(request.form['contact_num'])
-        #contact_num = "'" + request.form['contact_num'] + "'"
-        #print('after contact num')
-        #address = "'" + request.form['address'] + "'"
-        #print('after address before query')
-        #query = "UPDATE customer SET name=" + name + ","
-        #query += 'contact_num=' + contact_num + ","
-        #query += 'address=' + address
-        #query += ' WHERE customer_id=' + customer_id + ';'
-        #print('here is the query!\n', query)
-        #cursor = db.execute_query(db_connection=db_connection, query=query)
+
+        contact_num = "'" + request.form['contact_num'] + "'"
+        address = "'" + request.form['address'] + "'"
+        print('after address before query')
+        query = "UPDATE customer SET name=" + name + ","
+        query += 'contact_num=' + contact_num + ","
+        query += 'address=' + address
+        query += ' WHERE customer_id=' + customer_id + ';'
+        print('here is the query!\n', query)
+        cursor = db.execute_query(db_connection=db_connection, query=query)
 
     elif table_name == 'employee':
         employee_id = request.form['update']

@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="fed95846-30de-456a-b488-71845ed41439" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/update_customer.j2" beforeDir="false" afterPath="$PROJECT_DIR$/templates/update_customer.j2" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,8 +18,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="644">
-                  <caret line="199" column="9" selection-start-line="199" selection-start-column="9" selection-end-line="199" selection-end-column="9" />
+                <state relative-caret-position="588">
+                  <caret line="195" column="8" selection-start-line="195" selection-start-column="8" selection-end-line="195" selection-end-column="8" />
                   <folding>
                     <element signature="e#0#55#0" expanded="true" />
                   </folding>
@@ -105,8 +106,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/templates/update_customer.j2">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="273">
-                  <caret line="41" column="12" selection-start-line="41" selection-start-column="12" selection-end-line="41" selection-end-column="12" />
+                <state relative-caret-position="581">
+                  <caret line="63" column="77" selection-start-line="63" selection-start-column="77" selection-end-line="63" selection-end-column="77" />
                   <folding>
                     <element signature="n#style#0;n#nav#0;n#html#0;n#!!top" expanded="true" />
                   </folding>
@@ -132,7 +133,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/templates/update_jet_data.j2" />
-        <option value="$PROJECT_DIR$/templates/update_customer.j2" />
         <option value="$PROJECT_DIR$/templates/update_employee.j2" />
         <option value="$PROJECT_DIR$/templates/update_derivative_data.j2" />
         <option value="$PROJECT_DIR$/templates/index.j2" />
@@ -152,6 +152,7 @@
         <option value="$PROJECT_DIR$/database/db_connector.py" />
         <option value="$PROJECT_DIR$/CRUD_Commands.py" />
         <option value="$PROJECT_DIR$/database/db_ddq.sql" />
+        <option value="$PROJECT_DIR$/templates/update_customer.j2" />
         <option value="$PROJECT_DIR$/app.py" />
       </list>
     </option>
@@ -467,8 +468,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="644">
-          <caret line="199" column="9" selection-start-line="199" selection-start-column="9" selection-end-line="199" selection-end-column="9" />
+        <state relative-caret-position="588">
+          <caret line="195" column="8" selection-start-line="195" selection-start-column="8" selection-end-line="195" selection-end-column="8" />
           <folding>
             <element signature="e#0#55#0" expanded="true" />
           </folding>
