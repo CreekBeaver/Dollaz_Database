@@ -187,6 +187,9 @@ def table_update(table_name, request):
         customer_id = request.form['update']
         name = "'" + request.form['name'] + "'"
         print('assigning variables')
+
+        # It dies after this!!!
+        print(request.form['contact_num'])
         contact_num = "'" + request.form['contact_num'] + "'"
         print('after contact num')
         address = "'" + request.form['address'] + "'"
