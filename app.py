@@ -188,8 +188,9 @@ def table_update(table_name, request):
         name = "'" + request.form['name'] + "'"
         print('assigning variables')
         contact_num = "'" + request.form['contact_num'] + "'"
+        print('after contact num')
         address = "'" + request.form['address'] + "'"
-        print('before query')
+        print('after address before query')
         query = "UPDATE customer SET name=" + name + ","
         query += 'contact_num=' + contact_num + ","
         query += 'address=' + address
