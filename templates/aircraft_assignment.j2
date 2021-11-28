@@ -43,13 +43,23 @@
         </tr>
         <form action="/aircraft_assignment" method="post">
             <tr>
-                {% for key in data[0].keys() %}
-                <!-- Create a <th> tag with the key inside of it, this will be our header row -->
                 <div class="col-xs-2">
-                <th><input class="form-control" type="text" name="{{ key }}"></th>
+                <th>
+                    <select class="form-select" name="lease_id">
+                    {% for option in dropdowns['lease'] %}
+                        <OPTION value="{{option[0]}}">{{option[0]}}</OPTION>
+                    {% endfor %}
+                </th>
                 </div>
-                <!-- End of this for loop -->
-                {% endfor %}
+
+                <div class="col-xs-2">
+                <th>
+                    <select class="form-select" name="employee_id">
+                    {% for option in dropdowns['employee'] %}
+                        <OPTION value="{{option[0]}}">{{option[0]}}</OPTION>
+                    {% endfor %}
+                </th>
+                </div>
                 <th><button type="submit" name="add_row" value="execute">Add Row</button></th>
             </tr>
         </form>
